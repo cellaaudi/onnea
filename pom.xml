@@ -1,0 +1,6 @@
+<dependency>
+    <groupId>com.michalsvec</groupId>
+    <artifactId>single-row-calednar</artifactId>
+    <version>1.0.0</version>
+    <type>pom</type>
+</dependency>
