@@ -2,6 +2,7 @@ package com.cellaaudi.onnea.ui.home
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentHomeBinding
+import com.cellaaudi.onnea.ui.addfood.AddFoodActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -82,6 +84,11 @@ class HomeFragment : Fragment() {
 
             picker.datePicker.maxDate = System.currentTimeMillis()
             picker.show()
+        }
+
+        binding.btnAddBreakfast.setOnClickListener {
+            val intent = Intent(requireContext(), AddFoodActivity::class.java)
+            startActivity(intent)
         }
 
 //        val textView: TextView = binding.textView
