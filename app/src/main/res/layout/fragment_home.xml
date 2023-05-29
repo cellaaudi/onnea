@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
@@ -12,11 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:background="@null"
+        android:contentDescription="@string/desc_previous"
         android:src="@drawable/ic_round_navigate_before_24"
         app:layout_constraintBottom_toBottomOf="@+id/txtDay"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtDay"
-        app:tint="@color/green" />
+        app:tint="@color/green"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/btnNext"
@@ -24,11 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="@null"
+        android:contentDescription="@string/desc_next"
         android:src="@drawable/ic_round_navigate_next_24"
         app:layout_constraintBottom_toBottomOf="@+id/txtDay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtDay"
-        app:tint="@color/green" />
+        app:tint="@color/green"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/txtDay"
@@ -41,26 +46,276 @@
         app:layout_constraintStart_toEndOf="@+id/btnPrev"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/TitleText"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardWater"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="@string/breakfast"
-        app:layout_constraintStart_toStartOf="@+id/btnPrev"
-        app:layout_constraintTop_toBottomOf="@+id/btnPrev" />
-
-    <ImageButton
-        android:id="@+id/btnAddBreakfast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:src="@drawable/ic_round_add_24"
-        app:tint="@color/green"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        android:layout_marginTop="16dp"
+        card_view:cardCornerRadius="8dp"
+        app:contentPadding="16dp"
         app:layout_constraintEnd_toEndOf="@+id/btnNext"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/btnPrev"
+        app:layout_constraintTop_toBottomOf="@+id/txtDay">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/btnAddWater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:contentDescription="@string/desc_add"
+                android:src="@drawable/ic_round_add_24"
+                app:layout_constraintBottom_toBottomOf="@+id/txtTotalWater"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtTotalWater"
+                app:tint="@color/green"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <ImageButton
+                android:id="@+id/btnSubWater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                android:contentDescription="@string/desc_remove"
+                android:src="@drawable/ic_round_remove_24"
+                app:layout_constraintBottom_toBottomOf="@+id/txtTotalWater"
+                app:layout_constraintEnd_toStartOf="@+id/txtTotalWater"
+                app:layout_constraintTop_toTopOf="@+id/txtTotalWater"
+                app:tint="@color/green"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/textWater"
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/water"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTotalWater"
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/number"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="@+id/txtSubWater"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddWater"
+                app:layout_constraintTop_toTopOf="@+id/textWater" />
+
+            <TextView
+                android:id="@+id/txtSubWater"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/ml"
+                app:layout_constraintEnd_toStartOf="@+id/btnSubWater"
+                app:layout_constraintStart_toStartOf="@+id/textWater"
+                app:layout_constraintTop_toBottomOf="@+id/textWater" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardBreakfast"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        card_view:cardCornerRadius="8dp"
+        app:contentPadding="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnNext"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnPrev"
+        app:layout_constraintTop_toBottomOf="@+id/cardWater">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/btnAddBreakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:background="@null"
+                android:contentDescription="@string/desc_add"
+                android:src="@drawable/ic_round_add_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/green"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/txtBreakfast"
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/breakfast"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtSubBreakfast"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/kcal"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddBreakfast"
+                app:layout_constraintStart_toStartOf="@+id/txtBreakfast"
+                app:layout_constraintTop_toBottomOf="@+id/txtBreakfast" />
+
+            <TextView
+                android:id="@+id/txtSubBreakfast2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/food_name"
+                app:layout_constraintEnd_toEndOf="@+id/txtSubBreakfast"
+                app:layout_constraintStart_toStartOf="@+id/txtBreakfast"
+                app:layout_constraintTop_toBottomOf="@+id/txtSubBreakfast" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardLunch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        card_view:cardCornerRadius="8dp"
+        app:contentPadding="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnNext"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnPrev"
+        app:layout_constraintTop_toBottomOf="@+id/cardBreakfast">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/btnAddLunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:background="@null"
+                android:contentDescription="@string/desc_add"
+                android:src="@drawable/ic_round_add_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/green"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/txtLunch"
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lunch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtSubLunch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/kcal"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddLunch"
+                app:layout_constraintStart_toStartOf="@+id/txtLunch"
+                app:layout_constraintTop_toBottomOf="@+id/txtLunch" />
+
+            <TextView
+                android:id="@+id/txtSubLunch2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/food_name"
+                app:layout_constraintEnd_toEndOf="@+id/txtSubLunch"
+                app:layout_constraintStart_toStartOf="@+id/txtLunch"
+                app:layout_constraintTop_toBottomOf="@+id/txtSubLunch" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardDinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        card_view:cardCornerRadius="8dp"
+        app:contentPadding="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnNext"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnPrev"
+        app:layout_constraintTop_toBottomOf="@+id/cardLunch">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/btnAddDinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:background="@null"
+                android:contentDescription="@string/desc_add"
+                android:src="@drawable/ic_round_add_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/green"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/txtDinner"
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtSubDinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/kcal"
+                app:layout_constraintEnd_toStartOf="@+id/btnAddDinner"
+                app:layout_constraintStart_toStartOf="@+id/txtDinner"
+                app:layout_constraintTop_toBottomOf="@+id/txtDinner" />
+
+            <TextView
+                android:id="@+id/txtSubDinner2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/food_name"
+                app:layout_constraintEnd_toEndOf="@+id/txtSubDinner"
+                app:layout_constraintStart_toStartOf="@+id/txtDinner"
+                app:layout_constraintTop_toBottomOf="@+id/txtSubDinner" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

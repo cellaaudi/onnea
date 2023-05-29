@@ -39,6 +39,16 @@ class HomeFragment : Fragment() {
         binding.txtDay.text = dateFormat.format(getToday())
         binding.btnNext.visibility = View.INVISIBLE
 
+//        val textView: TextView = binding.textView
+//        homeViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.btnPrev.setOnClickListener {
             val button = "prev"
             val newDay = changeDay(binding.txtDay.text.toString(), button)
@@ -90,12 +100,6 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), AddFoodActivity::class.java)
             startActivity(intent)
         }
-
-//        val textView: TextView = binding.textView
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
-        return root
     }
 
     override fun onDestroyView() {

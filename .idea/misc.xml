@@ -3,14 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/drawable/ic_round_female_24.xml" value="0.183" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/drawable/ic_round_male_24.xml" value="0.183" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/drawable/search_background.xml" value="0.1985" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/activity_add_food.xml" value="0.2391304347826087" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/activity_add_food.xml" value="0.536" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/activity_food_image.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/activity_main.xml" value="0.22997416020671835" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/activity_questions.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_catering.xml" value="0.2" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_dashboard.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_discover.xml" value="0.2" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_home.xml" value="0.15521628498727735" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_q1.xml" value="0.264" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_q2.xml" value="0.20652173913043478" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/item_day.xml" value="0.4" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/menu/bottom_nav_menu.xml" value="0.14351851851851852" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/xml/image_path.xml" value="0.1" />
