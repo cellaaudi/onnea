@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/q_date_of_birth"
+        style="@style/RegularText"
         app:layout_constraintBottom_toTopOf="@+id/tbBirthDate"
         app:layout_constraintEnd_toEndOf="@+id/tbBirthDate"
         app:layout_constraintStart_toStartOf="@+id/tbBirthDate" />
@@ -24,6 +25,7 @@
         android:textAlignment="center"
         android:inputType="text|date"
         android:focusable="false"
+        style="@style/TitleText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +39,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/q_next"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
