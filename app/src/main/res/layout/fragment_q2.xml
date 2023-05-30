@@ -7,6 +7,18 @@
     tools:context=".ui.questions.Q2Fragment">
 
     <Button
+        android:id="@+id/btnQ2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/q_next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/btnMale"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

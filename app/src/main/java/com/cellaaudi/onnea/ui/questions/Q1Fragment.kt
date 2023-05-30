@@ -121,6 +121,17 @@ class Q1Fragment : Fragment() {
             }
 
         })
+
+        binding.btnQ1.setOnClickListener {
+            val q2Fragment = Q2Fragment()
+
+            val fm = parentFragmentManager
+            fm?.beginTransaction()?.apply {
+                replace(R.id.frame_container, q2Fragment, Q2Fragment::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
     }
 
     companion object {

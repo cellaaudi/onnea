@@ -40,6 +40,10 @@
     <string name="q_gender">What is your gender?</string>
     <string name="q_male">Male</string>
     <string name="q_female">Female</string>
+    <string name="q_weight">Weight</string>
+    <string name="q_height">Height</string>
+    <string name="q_kg">kg</string>
+    <string name="q_cm">cm</string>
     <string name="q_next">Next</string>
 
     <!--    Discover-->
