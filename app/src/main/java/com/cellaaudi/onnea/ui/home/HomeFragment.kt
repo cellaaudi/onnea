@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentHomeBinding
@@ -24,6 +25,8 @@ class HomeFragment : Fragment() {
     @SuppressLint("SimpleDateFormat")
     val dateFormat = SimpleDateFormat("dd MMMM yyyy")
 
+    private val viewModel: HomeViewModel by viewModels()
+
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
@@ -32,17 +35,16 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         binding.txtDay.text = dateFormat.format(getToday())
         binding.btnNext.visibility = View.INVISIBLE
 
-//        val textView: TextView = binding.textView
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
+        viewModel.date.observe(viewLifecycleOwner) { selDate ->
+            binding.txtDay.text = dateFormat.format(selDate)
+        }
+
         return root
     }
 
@@ -85,11 +87,10 @@ class HomeFragment : Fragment() {
                     val calendar = Calendar.getInstance()
                     calendar.set(selYear, selMonth, selDay)
 
+                    viewModel.setDate(calendar.time)
                     binding.txtDay.text = dateFormat.format(calendar.time)
                 },
-                year,
-                month,
-                day
+                year, month, day
             )
 
             picker.datePicker.maxDate = System.currentTimeMillis()
@@ -130,6 +131,8 @@ class HomeFragment : Fragment() {
 
         val value = if (button == "prev") -1 else 1
         cal.add(Calendar.DAY_OF_MONTH, value)
+
+        viewModel.setDate(cal.time)
 
         return cal.time
     }

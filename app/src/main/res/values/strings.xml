@@ -10,6 +10,7 @@
     <string name="desc_previous">Previous</string>
     <string name="desc_add">Add</string>
     <string name="desc_remove">Remove</string>
+    <string name="login">Sign In with Google</string>
 
     <!--    Profile-->
     <string name="name">Name</string>

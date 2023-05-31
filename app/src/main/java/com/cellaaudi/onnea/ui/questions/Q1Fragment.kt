@@ -5,10 +5,12 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentQ1Binding
@@ -96,7 +98,7 @@ class Q1Fragment : Fragment() {
                     val parsedDate = dateFormat.parse(binding.tbBirthDate.text.toString())
                     calBday.time = parsedDate
                     val year = calBday.get(Calendar.YEAR)
-                    val month = calBday.get(Calendar.MONTH)
+                    val month = calBday.get(Calendar.MONTH) + 1
                     val day = calBday.get(Calendar.DAY_OF_MONTH)
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
