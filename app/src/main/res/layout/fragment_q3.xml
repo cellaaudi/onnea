@@ -34,31 +34,32 @@
                 style="@style/TitleText"
                 android:layout_width="96dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:ems="10"
                 android:hint="@string/number"
-                android:inputType="numberDecimal"
+                android:inputType="number"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <TextView
                 android:id="@+id/textView10"
                 style="@style/RegularText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
                 android:text="@string/q_height"
-                app:layout_constraintBottom_toTopOf="@+id/tbHeight"
                 app:layout_constraintEnd_toEndOf="@+id/tbHeight"
-                app:layout_constraintStart_toStartOf="@+id/tbHeight" />
+                app:layout_constraintStart_toStartOf="@+id/tbHeight"
+                app:layout_constraintTop_toBottomOf="@+id/tbWeight" />
 
             <TextView
                 android:id="@+id/textView11"
                 style="@style/TitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/q_m"
+                android:text="@string/q_cm"
                 app:layout_constraintBottom_toBottomOf="@+id/tbHeight"
                 app:layout_constraintStart_toEndOf="@+id/tbHeight"
                 app:layout_constraintTop_toTopOf="@+id/tbHeight" />
@@ -68,14 +69,13 @@
                 style="@style/TitleText"
                 android:layout_width="96dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:ems="10"
                 android:hint="@string/number"
                 android:inputType="numberDecimal"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline5"
@@ -89,10 +89,11 @@
                 style="@style/RegularText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="96dp"
                 android:text="@string/q_weight"
-                app:layout_constraintBottom_toTopOf="@+id/tbWeight"
                 app:layout_constraintEnd_toEndOf="@+id/tbWeight"
-                app:layout_constraintStart_toStartOf="@+id/tbWeight" />
+                app:layout_constraintStart_toStartOf="@+id/tbWeight"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btnQ3"

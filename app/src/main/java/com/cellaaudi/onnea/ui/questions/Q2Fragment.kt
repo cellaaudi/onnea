@@ -60,12 +60,17 @@ class Q2Fragment : Fragment() {
             val q3Fragment = Q3Fragment()
 
             val fm = parentFragmentManager
-            fm?.beginTransaction()?.apply {
+            fm.beginTransaction().apply {
                 replace(R.id.frame_container, q3Fragment, Q3Fragment::class.java.simpleName)
                 addToBackStack(null)
                 commit()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

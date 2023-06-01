@@ -24,8 +24,8 @@ class Q3Fragment : Fragment() {
     private var _binding: FragmentQ3Binding? = null
     private val binding get() = _binding!!
 
-    private var isWdone: Boolean = false
-    private var isHdone: Boolean = false
+    private var weight: Double = 0.0
+    private var height: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ class Q3Fragment : Fragment() {
         val root: View = binding.root
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_q3, container, false)
+        return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,7 +59,36 @@ class Q3Fragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val text = s.toString().trim()
+                val input = s.toString()
+                weight = if (input.isNotEmpty()) {
+                    input.toDouble()
+                } else {
+                    0.0
+                }
+
+                btnState()
+            }
+
+        })
+
+        binding.tbHeight.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Do Nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Do Nothing
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val input = s.toString()
+                height = if (input.isNotEmpty()) {
+                    input.toDouble()
+                } else {
+                    0.0
+                }
+
+                btnState()
             }
 
         })
@@ -74,6 +103,17 @@ class Q3Fragment : Fragment() {
                 commit()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun btnState() {
+        val state = weight > 0.0 && height > 0.0
+        binding.btnQ3.isEnabled = state
+        binding.btnQ3.isClickable = state
     }
 
     companion object {

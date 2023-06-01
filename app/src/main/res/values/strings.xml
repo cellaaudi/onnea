@@ -44,13 +44,27 @@
     <string name="q_weight">Weight</string>
     <string name="q_height">Height</string>
     <string name="q_kg">kg</string>
-    <string name="q_m">m</string>
+    <string name="q_cm">cm</string>
     <string name="q_physic">How physically active are you in your daily life?</string>
     <string name="q_physic_1">Not Active</string>
     <string name="q_physic_2">Light Activity</string>
     <string name="q_physic_3">Moderate Activity</string>
     <string name="q_physic_4">Active</string>
     <string name="q_physic_5">Very Active</string>
+    <string name="q_goal">Do you have any specific weight-related goals?</string>
+    <string name="q_goal_1">Losing weight</string>
+    <string name="q_goal_2">Maintaining weight</string>
+    <string name="q_goal_3">Gaining weight</string>
+    <string name="q_habit">Do you have any specific eating habit or dietary preferences?</string>
+    <string name="q_habit_1">Vegetarian</string>
+    <string name="q_habit_2">Vegan</string>
+    <string name="q_habit_3">Pescatarian</string>
+    <string name="q_habit_4">Gluten-free</string>
+    <string name="q_habit_5">Ketogenic</string>
+    <string name="q_habit_6">Lacto-vegetarian</string>
+    <string name="q_habit_7">Ovo-vegetarian</string>
+    <string name="q_habit_8">Paleo</string>
+    <string name="q_habit_9">Primal</string>
     <string name="q_next">Next</string>
 
     <!--    Discover-->

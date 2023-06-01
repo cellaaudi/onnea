@@ -6,18 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cellaaudi.onnea.R
-import com.cellaaudi.onnea.databinding.FragmentQ3Binding
 import com.cellaaudi.onnea.databinding.FragmentQ4Binding
+import com.cellaaudi.onnea.databinding.FragmentQ5Binding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class Q4Fragment : Fragment() {
+class Q5Fragment : Fragment() {
 
     private var param1: String? = null
     private var param2: String? = null
 
-    private var _binding: FragmentQ4Binding? = null
+    private var _binding: FragmentQ5Binding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,7 @@ class Q4Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentQ4Binding.inflate(inflater, container, false)
+        _binding = FragmentQ5Binding.inflate(inflater, container, false)
         val root: View = binding.root
 
         // Inflate the layout for this fragment
@@ -42,17 +42,17 @@ class Q4Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rdoPhysic.setOnCheckedChangeListener { group, checkedId ->
-            binding.btnQ4.isClickable = true
-            binding.btnQ4.isEnabled = true
+        binding.rdoGoal.setOnCheckedChangeListener { group, checkedId ->
+            binding.btnQ5.isEnabled = true
+            binding.btnQ5.isClickable = true
         }
 
-        binding.btnQ4.setOnClickListener {
-            val q5Fragment = Q5Fragment()
+        binding.btnQ5.setOnClickListener {
+            val q6Fragment = Q6Fragment()
 
             val fm = parentFragmentManager
             fm.beginTransaction().apply {
-                replace(R.id.frame_container, q5Fragment, Q5Fragment::class.java.simpleName)
+                replace(R.id.frame_container, q6Fragment, Q6Fragment::class.java.simpleName)
                 addToBackStack(null)
                 commit()
             }
@@ -67,7 +67,7 @@ class Q4Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Q4Fragment().apply {
+            Q5Fragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
