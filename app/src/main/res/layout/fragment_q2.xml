@@ -14,35 +14,11 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/q_next"
+        android:textAllCaps="false"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnMale"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:drawableTop="@drawable/ic_round_male_24"
-        android:text="@string/q_male"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnFemale"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:drawableTop="@drawable/ic_round_female_24"
-        android:text="@string/q_female"
-        app:layout_constraintBottom_toBottomOf="@+id/btnMale"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/btnMale" />
 
     <TextView
         android:id="@+id/textView"
@@ -50,9 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/q_gender"
-        app:layout_constraintBottom_toTopOf="@+id/btnMale"
-        app:layout_constraintEnd_toEndOf="@+id/btnFemale"
-        app:layout_constraintStart_toStartOf="@+id/btnMale" />
+        app:layout_constraintBottom_toTopOf="@+id/rdoGroup"
+        app:layout_constraintEnd_toEndOf="@+id/rdoGroup"
+        app:layout_constraintStart_toStartOf="@+id/rdoGroup" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -62,16 +38,47 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <RadioGroup
+        android:id="@+id/rdoGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="568dp" >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:id="@+id/rdoMale"
+            style="@style/RegularText"
+            android:layout_width="104dp"
+            android:layout_height="128dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/radio_selector"
+            android:button="@null"
+            android:drawableBottom="@drawable/ic_round_male_24"
+            android:padding="16dp"
+            android:text="@string/q_male"
+            android:textAlignment="center"
+            android:textColor="@drawable/radio_text"
+            app:drawableTint="@drawable/radio_text" />
+
+        <RadioButton
+            android:id="@+id/rdoFemale"
+            style="@style/RegularText"
+            android:layout_width="104dp"
+            android:layout_height="128dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/radio_selector"
+            android:button="@null"
+            android:drawableBottom="@drawable/ic_round_female_24"
+            android:padding="16dp"
+            android:text="@string/q_female"
+            android:textAlignment="center"
+            android:textColor="@drawable/radio_text"
+            app:drawableTint="@drawable/radio_text" />
+
     </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

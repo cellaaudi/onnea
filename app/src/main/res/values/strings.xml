@@ -44,7 +44,13 @@
     <string name="q_weight">Weight</string>
     <string name="q_height">Height</string>
     <string name="q_kg">kg</string>
-    <string name="q_cm">cm</string>
+    <string name="q_m">m</string>
+    <string name="q_physic">How physically active are you in your daily life?</string>
+    <string name="q_physic_1">Not Active</string>
+    <string name="q_physic_2">Light Activity</string>
+    <string name="q_physic_3">Moderate Activity</string>
+    <string name="q_physic_4">Active</string>
+    <string name="q_physic_5">Very Active</string>
     <string name="q_next">Next</string>
 
     <!--    Discover-->

@@ -40,6 +40,7 @@
         android:layout_marginBottom="16dp"
         android:text="@string/q_next"
         android:textAllCaps="false"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

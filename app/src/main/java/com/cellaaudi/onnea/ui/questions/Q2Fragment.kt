@@ -13,11 +13,6 @@ import com.cellaaudi.onnea.databinding.FragmentQ2Binding
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Q2Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Q2Fragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -48,7 +43,29 @@ class Q2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.rdoGroup.setOnCheckedChangeListener { group, checkedId ->
+            var gender: String = ""
+            if (checkedId == R.id.rdoMale) {
+                gender = "male"
+            } else if (checkedId == R.id.rdoFemale) {
+                gender = "female"
+            }
 
+            binding.btnQ2.text = "Yes, I'm a $gender"
+            binding.btnQ2.isClickable = true
+            binding.btnQ2.isEnabled = true
+        }
+
+        binding.btnQ2.setOnClickListener {
+            val q3Fragment = Q3Fragment()
+
+            val fm = parentFragmentManager
+            fm?.beginTransaction()?.apply {
+                replace(R.id.frame_container, q3Fragment, Q3Fragment::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
     }
 
     companion object {

@@ -7,6 +7,8 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/drawable/ic_round_male_24.xml" value="0.183" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/drawable/radio_button.xml" value="0.2065" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/drawable/radio_selected.xml" value="0.2065" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/drawable/radio_selector.xml" value="0.2065" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/drawable/radio_text.xml" value="0.2065" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/drawable/radio_unselected.xml" value="0.2065" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/drawable/search_background.xml" value="0.1985" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/activity_add_food.xml" value="0.536" />
@@ -20,8 +22,9 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_home.xml" value="0.2330508474576271" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_q1.xml" value="0.264" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_q2.xml" value="0.536" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_q3.xml" value="0.2" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_q2.xml" value="0.264" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_q3.xml" value="0.25462962962962965" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/fragment_q4.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/layout/item_day.xml" value="0.4" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/menu/bottom_nav_menu.xml" value="0.14351851851851852" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/Onnea/app/src/main/res/xml/image_path.xml" value="0.1" />
