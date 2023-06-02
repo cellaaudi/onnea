@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.questions.Q7Fragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <Button
+                android:id="@+id/btnQ7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:enabled="true"
+                android:text="@string/q_no_allergy"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cbWheat"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textView13"
+                style="@style/RegularText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/q_allergy"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/cbEgg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/q_allergy_1"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/textView13"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+            <CheckBox
+                android:id="@+id/cbGluten"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/q_allergy_2"
+                app:layout_constraintEnd_toEndOf="@+id/textView13"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toTopOf="@+id/cbEgg" />
+
+            <CheckBox
+                android:id="@+id/cbGarin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/q_allergy_3"
+                app:layout_constraintEnd_toEndOf="@+id/cbEgg"
+                app:layout_constraintStart_toStartOf="@+id/cbEgg"
+                app:layout_constraintTop_toBottomOf="@+id/cbEgg" />
+
+            <CheckBox
+                android:id="@+id/cbPeanut"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/q_allergy_4"
+                app:layout_constraintEnd_toEndOf="@+id/cbGluten"
+                app:layout_constraintStart_toStartOf="@+id/cbGluten"
+                app:layout_constraintTop_toTopOf="@+id/cbGarin" />
+
+            <CheckBox
+                android:id="@+id/cbSeafood"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/q_allergy_5"
+                app:layout_constraintEnd_toEndOf="@+id/cbGarin"
+                app:layout_constraintStart_toStartOf="@+id/cbGarin"
+                app:layout_constraintTop_toBottomOf="@+id/cbGarin" />
+
+            <CheckBox
+                android:id="@+id/cbSesame"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/q_allergy_6"
+                app:layout_constraintEnd_toEndOf="@+id/cbPeanut"
+                app:layout_constraintStart_toStartOf="@+id/cbPeanut"
+                app:layout_constraintTop_toTopOf="@+id/cbSeafood" />
+
+            <CheckBox
+                android:id="@+id/cbShellfish"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/q_allergy_7"
+                app:layout_constraintEnd_toEndOf="@+id/cbSeafood"
+                app:layout_constraintStart_toStartOf="@+id/cbSeafood"
+                app:layout_constraintTop_toBottomOf="@+id/cbSeafood" />
+
+            <CheckBox
+                android:id="@+id/cbSoy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/q_allergy_8"
+                app:layout_constraintEnd_toEndOf="@+id/cbSesame"
+                app:layout_constraintStart_toStartOf="@+id/cbSesame"
+                app:layout_constraintTop_toTopOf="@+id/cbShellfish" />
+
+            <CheckBox
+                android:id="@+id/cbSulfite"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/q_allergy_9"
+                app:layout_constraintEnd_toEndOf="@+id/cbShellfish"
+                app:layout_constraintStart_toStartOf="@+id/cbShellfish"
+                app:layout_constraintTop_toBottomOf="@+id/cbShellfish" />
+
+            <CheckBox
+                android:id="@+id/cbWheat"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/q_allergy_11"
+                app:layout_constraintEnd_toEndOf="@+id/cbSulfite"
+                app:layout_constraintStart_toStartOf="@+id/cbSulfite"
+                app:layout_constraintTop_toBottomOf="@+id/cbSulfite" />
+
+            <CheckBox
+                android:id="@+id/cbDairy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/q_allergy_12"
+                app:layout_constraintEnd_toEndOf="@+id/cbTreeNut"
+                app:layout_constraintStart_toStartOf="@+id/cbTreeNut"
+                app:layout_constraintTop_toTopOf="@+id/cbWheat" />
+
+            <CheckBox
+                android:id="@+id/cbTreeNut"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/q_allergy_10"
+                app:layout_constraintEnd_toEndOf="@+id/cbSoy"
+                app:layout_constraintStart_toStartOf="@+id/cbSoy"
+                app:layout_constraintTop_toTopOf="@+id/cbSulfite" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

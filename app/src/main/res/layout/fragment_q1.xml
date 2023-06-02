@@ -18,14 +18,14 @@
 
     <EditText
         android:id="@+id/tbBirthDate"
+        style="@style/TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/q_date_format"
-        android:textAlignment="center"
-        android:inputType="text|date"
         android:focusable="false"
-        style="@style/TitleText"
+        android:hint="@string/q_date_format"
+        android:inputType="text|date"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,12 +36,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:enabled="false"
         android:text="@string/q_next"
         android:textAllCaps="false"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbBirthDate"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

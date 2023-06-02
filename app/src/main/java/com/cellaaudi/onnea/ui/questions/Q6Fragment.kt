@@ -48,11 +48,11 @@ class Q6Fragment : Fragment() {
         }
 
         binding.btnQ6.setOnClickListener {
-//            val q7Fragment = Q7Fragment()
+            val q7Fragment = Q7Fragment()
 
             val fm = parentFragmentManager
             fm.beginTransaction().apply {
-//                replace(R.id.frame_container, q7Fragment, Q7Fragment::class.java.simpleName)
+                replace(R.id.frame_container, q7Fragment, Q7Fragment::class.java.simpleName)
                 addToBackStack(null)
                 commit()
             }

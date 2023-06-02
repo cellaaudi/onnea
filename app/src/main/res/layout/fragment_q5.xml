@@ -23,15 +23,16 @@
                 android:id="@+id/btnQ5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="64dp"
                 android:layout_marginBottom="16dp"
                 android:enabled="false"
                 android:text="@string/q_next"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="@+id/rdoGoal"
+                app:layout_constraintStart_toStartOf="@+id/rdoGoal"
+                app:layout_constraintTop_toBottomOf="@+id/rdoGoal"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -51,15 +52,13 @@
                 android:id="@+id/rdoGoal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textView8"
+                app:layout_constraintStart_toStartOf="@+id/textView8"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <RadioButton
-                    android:id="@+id/rdoGoal1"
+                    android:id="@+id/rdoLose"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/radio_selector"
@@ -70,7 +69,7 @@
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoGoal2"
+                    android:id="@+id/rdoMaintain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -82,7 +81,7 @@
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoGoal3"
+                    android:id="@+id/rdoGain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"

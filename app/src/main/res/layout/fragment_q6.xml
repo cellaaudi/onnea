@@ -23,42 +23,42 @@
                 android:id="@+id/btnQ6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="64dp"
                 android:layout_marginBottom="16dp"
                 android:enabled="false"
                 android:text="@string/q_next"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="@+id/rdoHabit"
+                app:layout_constraintStart_toStartOf="@+id/rdoHabit"
+                app:layout_constraintTop_toBottomOf="@+id/rdoHabit"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/textView12"
+                style="@style/RegularText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/q_habit"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toTopOf="@+id/rdoHabit"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <RadioGroup
                 android:id="@+id/rdoHabit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textView12"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <RadioButton
-                    android:id="@+id/rdoHabit1"
+                    android:id="@+id/rdoVegetarian"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/radio_selector"
@@ -69,7 +69,7 @@
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoHabit2"
+                    android:id="@+id/rdoVegan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -81,7 +81,7 @@
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoHabit3"
+                    android:id="@+id/rdoPescatarian"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -93,7 +93,7 @@
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoHabit4"
+                    android:id="@+id/rdoGlutenFree"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -105,7 +105,7 @@
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoHabit5"
+                    android:id="@+id/rdoKetogenic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -117,7 +117,7 @@
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoHabit6"
+                    android:id="@+id/rdoLactoVeg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -129,7 +129,7 @@
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoHabit7"
+                    android:id="@+id/rdoOvoVeg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -141,7 +141,7 @@
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoHabit8"
+                    android:id="@+id/rdoPaleo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -153,7 +153,7 @@
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoHabit9"
+                    android:id="@+id/rdoPrimal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -161,6 +161,18 @@
                     android:button="@null"
                     android:padding="16dp"
                     android:text="@string/q_habit_9"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_text" />
+
+                <RadioButton
+                    android:id="@+id/rdoNoHabit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:padding="16dp"
+                    android:text="@string/q_habit_10"
                     android:textAlignment="center"
                     android:textColor="@drawable/radio_text" />
 

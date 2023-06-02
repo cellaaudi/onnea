@@ -26,6 +26,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="64dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:enabled="false"
@@ -33,7 +34,9 @@
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rdoPhysic"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -61,19 +64,18 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <RadioButton
-                    android:id="@+id/rdoPhysic1"
-                    android:textAlignment="center"
+                    android:id="@+id/rdoNotActive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/radio_selector"
                     android:button="@null"
                     android:padding="16dp"
                     android:text="@string/q_physic_1"
+                    android:textAlignment="center"
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoPhysic2"
-                    android:textAlignment="center"
+                    android:id="@+id/rdoLightActive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -81,11 +83,11 @@
                     android:button="@null"
                     android:padding="16dp"
                     android:text="@string/q_physic_2"
+                    android:textAlignment="center"
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoPhysic3"
-                    android:textAlignment="center"
+                    android:id="@+id/rdoModerateActive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -93,11 +95,11 @@
                     android:button="@null"
                     android:padding="16dp"
                     android:text="@string/q_physic_3"
+                    android:textAlignment="center"
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoPhysic4"
-                    android:textAlignment="center"
+                    android:id="@+id/rdoActive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -105,11 +107,11 @@
                     android:button="@null"
                     android:padding="16dp"
                     android:text="@string/q_physic_4"
+                    android:textAlignment="center"
                     android:textColor="@drawable/radio_text" />
 
                 <RadioButton
-                    android:id="@+id/rdoPhysic5"
-                    android:textAlignment="center"
+                    android:id="@+id/rdoVeryActive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -117,6 +119,7 @@
                     android:button="@null"
                     android:padding="16dp"
                     android:text="@string/q_physic_5"
+                    android:textAlignment="center"
                     android:textColor="@drawable/radio_text" />
 
             </RadioGroup>

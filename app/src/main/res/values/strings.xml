@@ -51,7 +51,7 @@
     <string name="q_physic_3">Moderate Activity</string>
     <string name="q_physic_4">Active</string>
     <string name="q_physic_5">Very Active</string>
-    <string name="q_goal">Do you have any specific weight-related goals?</string>
+    <string name="q_goal">What is your weight-related goals?</string>
     <string name="q_goal_1">Losing weight</string>
     <string name="q_goal_2">Maintaining weight</string>
     <string name="q_goal_3">Gaining weight</string>
@@ -65,6 +65,22 @@
     <string name="q_habit_7">Ovo-vegetarian</string>
     <string name="q_habit_8">Paleo</string>
     <string name="q_habit_9">Primal</string>
+    <string name="q_habit_10">No</string>
+    <string name="q_allergy">Do you have any food allergies?</string>
+    <string name="q_allergy_1">Egg</string>
+    <string name="q_allergy_2">Gluten</string>
+    <string name="q_allergy_3">Garin</string>
+    <string name="q_allergy_4">Peanut</string>
+    <string name="q_allergy_5">Seafood</string>
+    <string name="q_allergy_6">Sesame</string>
+    <string name="q_allergy_7">Shellfish</string>
+    <string name="q_allergy_8">Soy</string>
+    <string name="q_allergy_9">Sulfite</string>
+    <string name="q_allergy_10">Tree nut</string>
+    <string name="q_allergy_11">Wheat</string>
+    <string name="q_allergy_12">Dairy</string>
+    <string name="q_yes_allergy">Yes, I have food allergies</string>
+    <string name="q_no_allergy">No, I don\'t have any food allergies</string>
     <string name="q_next">Next</string>
 
     <!--    Discover-->
