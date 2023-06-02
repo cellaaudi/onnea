@@ -5,18 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.cellaaudi.onnea.R
-import com.cellaaudi.onnea.databinding.FragmentQ2Binding
+import com.cellaaudi.onnea.databinding.FragmentQ8Binding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class Q2Fragment : Fragment() {
+class Q8Fragment : Fragment() {
 
     private var param1: String? = null
     private var param2: String? = null
 
-    private var _binding: FragmentQ2Binding? = null
+    private var _binding: FragmentQ8Binding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +30,7 @@ class Q2Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentQ2Binding.inflate(inflater, container, false)
+        _binding = FragmentQ8Binding.inflate(inflater, container, false)
         val root: View = binding.root
 
         // Inflate the layout for this fragment
@@ -41,28 +40,15 @@ class Q2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rdoGroup.setOnCheckedChangeListener { group, checkedId ->
-            var gender: String = ""
-            if (checkedId == R.id.rdoMale) {
-                gender = "male"
-            } else if (checkedId == R.id.rdoFemale) {
-                gender = "female"
-            }
-
-            binding.btnQ2.text = "Yes, I'm a $gender"
-            binding.btnQ2.isClickable = true
-            binding.btnQ2.isEnabled = true
-        }
-
-        binding.btnQ2.setOnClickListener {
-            val q3Fragment = Q3Fragment()
-
-            val fm = parentFragmentManager
-            fm.beginTransaction().apply {
-                replace(R.id.frame_container, q3Fragment, Q3Fragment::class.java.simpleName)
-                addToBackStack(null)
-                commit()
-            }
+        binding.btnQ8.setOnClickListener {
+//            val q9Fragment = Q9Fragment()
+//
+//            val fm = parentFragmentManager
+//            fm.beginTransaction().apply {
+//                replace(R.id.frame_container, q9Fragment, Q9Fragment::class.java.simpleName)
+//                addToBackStack(null)
+//                commit()
+//            }
         }
     }
 
@@ -74,7 +60,7 @@ class Q2Fragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Q2Fragment().apply {
+            Q8Fragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

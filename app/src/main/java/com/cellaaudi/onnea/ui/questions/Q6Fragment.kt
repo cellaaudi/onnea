@@ -1,12 +1,11 @@
 package com.cellaaudi.onnea.ui.questions
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.cellaaudi.onnea.R
-import com.cellaaudi.onnea.databinding.FragmentQ5Binding
 import com.cellaaudi.onnea.databinding.FragmentQ6Binding
 
 private const val ARG_PARAM1 = "param1"

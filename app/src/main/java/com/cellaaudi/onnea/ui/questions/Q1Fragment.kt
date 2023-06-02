@@ -5,13 +5,10 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentQ1Binding
 import java.text.SimpleDateFormat
@@ -136,7 +133,7 @@ class Q1Fragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             Q1Fragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)

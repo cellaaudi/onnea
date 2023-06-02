@@ -81,7 +81,15 @@
     <string name="q_allergy_12">Dairy</string>
     <string name="q_yes_allergy">Yes, I have food allergies</string>
     <string name="q_no_allergy">No, I don\'t have any food allergies</string>
+    <string name="q_spicy">On a scale from 0 to 5, how much do you like spicy food?</string>
+    <string name="q_spicy_0">I don\'t like it</string>
+    <string name="q_spicy_5">I love it!</string>
+    <string name="q_fruit">On a scale from 0 to 5, how often do you eat fruits?</string>
+    <string name="q_fruit_0">Not at all</string>
+    <string name="q_fruit_5">Everyday</string>
+    <string name="q_health">On a scale from 0 to 5, how often do you eat healthy food?</string>
     <string name="q_next">Next</string>
+    <string name="q_finish">Finish</string>
 
     <!--    Discover-->
     <string name="search_for_food">Search for food</string>

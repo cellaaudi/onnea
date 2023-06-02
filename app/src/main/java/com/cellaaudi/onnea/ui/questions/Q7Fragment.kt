@@ -1,22 +1,19 @@
 package com.cellaaudi.onnea.ui.questions
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.fragment.app.Fragment
 import com.cellaaudi.onnea.R
-import com.cellaaudi.onnea.databinding.FragmentQ6Binding
 import com.cellaaudi.onnea.databinding.FragmentQ7Binding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class Q7Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -79,6 +76,17 @@ class Q7Fragment : Fragment() {
         binding.cbTreeNut.setOnCheckedChangeListener(cbListener)
         binding.cbWheat.setOnCheckedChangeListener(cbListener)
         binding.cbDairy.setOnCheckedChangeListener(cbListener)
+
+        binding.btnQ7.setOnClickListener {
+            val q8Fragment = Q8Fragment()
+
+            val fm = parentFragmentManager
+            fm.beginTransaction().apply {
+                replace(R.id.frame_container, q8Fragment, Q8Fragment::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
     }
 
     override fun onDestroyView() {
