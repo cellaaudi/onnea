@@ -11,6 +11,7 @@
     <string name="desc_add">Add</string>
     <string name="desc_remove">Remove</string>
     <string name="login">Sign In with Google</string>
+    <string name="register">Sign Up with Google</string>
 
     <!--    Profile-->
     <string name="name">Name</string>
