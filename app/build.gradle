@@ -14,12 +14,19 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\""
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\""
+        }
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\""
         }
     }
     compileOptions {
@@ -53,4 +60,10 @@ dependencies {
 
     // google
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
+
+    // network
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 }
