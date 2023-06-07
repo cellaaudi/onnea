@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "30791336549",
+    "firebase_url": "https://onnea-apps-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "onnea-apps",
+    "storage_bucket": "onnea-apps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30791336549:android:150e3a655754356046fc8c",
+        "android_client_info": {
+          "package_name": "com.cellaaudi.onnea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30791336549-as4nt0nunu17scbi2vggn047egrpqrdr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cellaaudi.onnea",
+            "certificate_hash": "124559ca8a950e853a6a40f4415635deeaf278d8"
+          }
+        },
+        {
+          "client_id": "30791336549-qdt25ruaktub1om0ordglkm6ci7m57ll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9rAPulbiXzpax063Dbv8GURLF_LupkNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30791336549-qdt25ruaktub1om0ordglkm6ci7m57ll.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
