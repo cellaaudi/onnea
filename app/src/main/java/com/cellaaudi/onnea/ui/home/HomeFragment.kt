@@ -21,14 +21,12 @@ import java.util.*
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     @SuppressLint("SimpleDateFormat")
     val dateFormat = SimpleDateFormat("dd MMMM yyyy")
 
     private val viewModel: HomeViewModel by viewModels()
-
-    // This property is only valid between onCreateView and onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,

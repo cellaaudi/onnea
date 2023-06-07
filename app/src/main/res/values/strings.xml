@@ -94,8 +94,16 @@
 
     <!--    Discover-->
     <string name="search_for_food">Search for food</string>
+    <string name="search_name">Food\'s name</string>
+    <string name="search_photo">Food\'s photo</string>
 
-    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID</string>
+    <!--    Catering-->
+    <string name="catering_name">Catering\'s Name</string>
+    <string name="catering_loc">Catering\'s Location</string>
+    <string name="catering_rate">Catering\'s Rate</string>
+    <string name="catering_rate_icon">Catering\'s Rate Icon</string>
+
+<!--    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID</string>-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

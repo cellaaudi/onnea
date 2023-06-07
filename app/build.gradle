@@ -7,7 +7,7 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\RIYO\\Documents\\Capstone Bangkit\\onnea\\cloudcomputing\\keystore.jks')
+            storeFile file('../cloudcomputing/keystore.jks')
             storePassword 'bangkit'
             keyAlias 'keymyapp'
             keyPassword 'bangkit'

@@ -5,22 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.cellaaudi.onnea.R
+import com.cellaaudi.onnea.adapter.SearchFoodAdapter
+import com.cellaaudi.onnea.databinding.FragmentDiscoverBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DiscoverFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DiscoverFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
+
+    private var _binding: FragmentDiscoverBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: DiscoverViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,20 +37,61 @@ class DiscoverFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_discover, container, false)
+        _binding = FragmentDiscoverBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+        viewModel.load.observe(requireActivity()) {
+            showLoading(it)
+        }
+
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.load.observe(requireActivity()) {
+                    showLoading(it)
+                }
+
+                binding.viewFlipper.displayedChild = binding.viewFlipper.indexOfChild(binding.layoutSearch)
+
+                viewModel.search(query.toString())
+                binding.rvFood.setHasFixedSize(true)
+                val lm = LinearLayoutManager(requireContext())
+                binding.rvFood.layoutManager = lm
+                viewModel.search.observe(requireActivity()) { query ->
+                    val listFood = SearchFoodAdapter(query)
+                    binding.rvFood.adapter = listFood
+                }
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrEmpty()) {
+                    binding.viewFlipper.displayedChild = binding.viewFlipper.indexOfChild(binding.scDiscover)
+
+                    return false
+                }
+
+                return false
+            }
+
+        })
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.pbSearchFood.visibility = View.VISIBLE
+        } else {
+            binding.pbSearchFood.visibility = View.GONE
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DiscoverFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             DiscoverFragment().apply {
