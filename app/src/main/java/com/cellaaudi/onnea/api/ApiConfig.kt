@@ -24,7 +24,7 @@ class ApiConfig {
                 .addInterceptor(loggingInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("BuildConfig.B")
+                .baseUrl("https://ubaya.fun/native/160420004/onnea/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

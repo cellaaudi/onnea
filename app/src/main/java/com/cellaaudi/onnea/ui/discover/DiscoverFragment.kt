@@ -40,6 +40,8 @@ class DiscoverFragment : Fragment() {
         _binding = FragmentDiscoverBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        showLoading(false)
+
         viewModel.load.observe(requireActivity()) {
             showLoading(it)
         }

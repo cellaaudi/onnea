@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">Onnea</string>
 
+    <!--    Login & Register-->
+    <string name="login">Login</string>
+    <string name="to_register">Don\'t have an account yet?</string>
+    <string name="register">Create an Account</string>
+    <string name="to_login">Already have an account?</string>
+    <string name="sign_in">Signing in…</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="u_name">Name</string>
+    <string name="u_email">Email</string>
+    <string name="u_password">Password</string>
+    <string name="u_password_2">Repeat Password</string>
+
     <!--    Navigation & Description-->
     <string name="title_home">Home</string>
     <string name="title_discover">Discover</string>
@@ -10,8 +22,6 @@
     <string name="desc_previous">Previous</string>
     <string name="desc_add">Add</string>
     <string name="desc_remove">Remove</string>
-    <string name="login">Sign In with Google</string>
-    <string name="register">Sign Up with Google</string>
 
     <!--    Profile-->
     <string name="name">Name</string>
@@ -21,6 +31,7 @@
     <string name="weight">Weight (kg)</string>
     <string name="height">Height (cm)</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="logout">Sign Out</string>
 
     <!--    Home-->
     <string name="day">Day</string>
@@ -103,7 +114,6 @@
     <string name="catering_rate">Catering\'s Rate</string>
     <string name="catering_rate_icon">Catering\'s Rate Icon</string>
 
-<!--    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID</string>-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

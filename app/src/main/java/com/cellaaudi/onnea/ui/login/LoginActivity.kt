@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.cellaaudi.onnea.MainActivity
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.ActivityLoginBinding
 import com.cellaaudi.onnea.databinding.ActivityMainBinding
+import com.cellaaudi.onnea.ui.questions.QuestionsActivity
+import com.cellaaudi.onnea.ui.register.RegisterActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -19,76 +22,87 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var btnGoogle: Button
-    lateinit var btnRegister: Button
-    lateinit var googleSignInClient: GoogleSignInClient
-    lateinit var progressDialog: ProgressDialog
 
-    var firebaseAuth = FirebaseAuth.getInstance()
+    private var _binding: ActivityLoginBinding? = null
+    private val binding get() = _binding
 
-    companion object{
-        private const val RC_SIGN_IN = 1001;
-    }
+    private val viewModel: LoginViewModel by viewModels()
 
-    override fun onStart() {
-        super.onStart()
-        if (firebaseAuth.currentUser!=null){
-            startActivity(Intent(this, MainActivity::class.java))
-        }
-    }
+//    lateinit var googleSignInClient: GoogleSignInClient
+//    lateinit var progressDialog: ProgressDialog
+//    var firebaseAuth = FirebaseAuth.getInstance()
 
-    private lateinit var binding: ActivityLoginBinding
+//    override fun onStart() {
+//        super.onStart()
+//        if (firebaseAuth.currentUser!=null){
+//            startActivity(Intent(this, MainActivity::class.java))
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        btnGoogle = findViewById(R.id.btnRegister)
+        _binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
-        progressDialog = ProgressDialog(this)
-        progressDialog.setTitle("Logging")
-        progressDialog.setMessage("Silahkan Tunggu ......")
-
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        btnGoogle.setOnClickListener {
-            val signInTent = googleSignInClient.signInIntent
-            startActivityForResult(signInTent, RC_SIGN_IN)
+        binding?.btnLogin2Register?.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
+
+//        progressDialog = ProgressDialog(this)
+//        progressDialog.setTitle(getString(R.string.sign_in))
+//        progressDialog.setMessage(getString(R.string.please_wait))
+//
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.default_web_client_id))
+//            .requestEmail()
+//            .build()
+//
+//        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+//        binding?.btnGoogle?.setOnClickListener {
+//            val intent = googleSignInClient.signInIntent
+//            startActivityForResult(intent, RC_SIGN_IN)
+//        }
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+//    @Deprecated("Deprecated in Java")
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == RC_SIGN_IN){
+//            //Menangani Process Login Google
+//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+//            try{
+//                // Jika Berhasil Login
+//                val account = task.getResult(ApiException::class.java)!!
+//                viewModel.doesUserExist.observe(this, { existing ->
+//                    firebaseAuthWithGoogle(account.idToken!!, existing)
+//                })
+//            }catch (e: ApiException){
+//                e.printStackTrace()
+//                Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
 
-        if (requestCode == RC_SIGN_IN){
-            //Menangani Process Login Google
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try{
-                // Jika Berhasil Login
-                val account = task.getResult(ApiException::class.java)!!
-                firebaseAuthWithGoogle(account.idToken!!)
-            }catch (e: ApiException){
-                e.printStackTrace()
-                Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-    private fun firebaseAuthWithGoogle(idToken: String){
-        progressDialog.show()
-        val credentian = GoogleAuthProvider.getCredential(idToken, null)
-        firebaseAuth.signInWithCredential(credentian)
-            .addOnSuccessListener {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
-            .addOnCompleteListener {
-                progressDialog.dismiss()
-            }
-    }
+//    private fun firebaseAuthWithGoogle(idToken: String, exist: Boolean){
+//        progressDialog.show()
+//        val credentian = GoogleAuthProvider.getCredential(idToken, null)
+//        firebaseAuth.signInWithCredential(credentian)
+//            .addOnSuccessListener {
+//                if (exist) {
+//                    startActivity(Intent(this, MainActivity::class.java))
+//                } else {
+//                    startActivity(Intent(this, QuestionsActivity::class.java))
+//                }
+//            }
+//            .addOnCompleteListener {
+//                progressDialog.dismiss()
+//            }
+//    }
 
+    companion object{
+//        private const val RC_SIGN_IN = 1001;
+    }
 }
