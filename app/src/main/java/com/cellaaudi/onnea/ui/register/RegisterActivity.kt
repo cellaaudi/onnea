@@ -80,14 +80,13 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show()
             }
+        } else if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startGallery()
+            } else {
+                Toast.makeText(this, "Gallery permission denied", Toast.LENGTH_SHORT).show()
+            }
         }
-//        else if (requestCode == STORAGE_PERMISSION_CODE) {
-//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                startGallery()
-//            } else {
-//                Toast.makeText(this, "Gallery permission denied", Toast.LENGTH_SHORT).show()
-//            }
-//        }
     }
 
     private fun showDialog() {
@@ -95,7 +94,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Choose an option")
-        builder.setItems(options) { dialog, item ->
+        builder.setItems(options) { _, item ->
             when (options[item]) {
                 "Camera" -> {
                     if (checkCameraPermission()) {
@@ -109,7 +108,13 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
                 "Gallery" -> {
-                    startGallery()
+                    if (checkStoragePermission()) {
+                        startGallery()
+                    } else {
+                        requestStoragePermission()
+
+                        if (checkStoragePermission()) startGallery()
+                    }
                 }
             }
         }
@@ -227,18 +232,18 @@ class RegisterActivity : AppCompatActivity() {
         )
     }
 
-//    private fun checkStoragePermission(): Boolean {
-//        val result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-//        return result == PackageManager.PERMISSION_GRANTED
-//    }
-//
-//    private fun requestStoragePermission() {
-//        ActivityCompat.requestPermissions(
-//            this,
-//            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-//            STORAGE_PERMISSION_CODE
-//        )
-//    }
+    private fun checkStoragePermission(): Boolean {
+        val result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        return result == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestStoragePermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            STORAGE_PERMISSION_CODE
+        )
+    }
 
     private fun reduceFileImage(file: File): File {
         val bitmap = BitmapFactory.decodeFile(file.path)
@@ -273,8 +278,6 @@ class RegisterActivity : AppCompatActivity() {
                 requestImageFile
             )
 
-//            Toast.makeText(this, binding?.txtRegEmail?.editText?.text.toString().toRequestBody("text/plain".toMediaType()).toString(), Toast.LENGTH_SHORT).show()
-
             viewModel.register(
                 binding?.txtRegEmail?.editText?.text.toString().toRequestBody("text/plain".toMediaType()),
                 binding?.txtRegPass?.editText?.text.toString().toRequestBody("text/plain".toMediaType()),
@@ -299,6 +302,6 @@ class RegisterActivity : AppCompatActivity() {
 
     companion object {
         private const val CAMERA_PERMISSION_CODE = 1
-//        private const val STORAGE_PERMISSION_CODE = 2
+        private const val STORAGE_PERMISSION_CODE = 2
     }
 }
