@@ -3,6 +3,7 @@ package com.cellaaudi.onnea.ui.login
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -72,9 +73,10 @@ class LoginActivity : AppCompatActivity() {
             try{
                 // Jika Berhasil Login
                 val account = task.getResult(ApiException::class.java)!!
-                viewModel.doesUserExist.observe(this) { existing ->
-                    firebaseAuthWithGoogle(account.idToken!!, existing)
-                }
+//                viewModel.doesUserExist.observe(this) { existing ->
+                    firebaseAuthWithGoogle(account.idToken!!)
+//                }
+//                Log.e(TAG, "Lo")
             }catch (e: ApiException){
                 e.printStackTrace()
                 Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT).show()
@@ -82,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String, exist: Boolean){
+    private fun firebaseAuthWithGoogle(idToken: String){
         progressDialog.show()
         val credentian = GoogleAuthProvider.getCredential(idToken, null)
         firebaseAuth.signInWithCredential(credentian)
@@ -99,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object{
+        private const val TAG = "LoginActivity"
         private const val RC_SIGN_IN = 1001
     }
 }
