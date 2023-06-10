@@ -87,11 +87,11 @@ class LoginActivity : AppCompatActivity() {
         val credentian = GoogleAuthProvider.getCredential(idToken, null)
         firebaseAuth.signInWithCredential(credentian)
             .addOnSuccessListener {
-                if (exist) {
+//                if (exist) {
                     startActivity(Intent(this, MainActivity::class.java))
-                } else {
-                    startActivity(Intent(this, QuestionsActivity::class.java))
-                }
+//                } else {
+//                    startActivity(Intent(this, QuestionsActivity::class.java))
+//                }
             }
             .addOnCompleteListener {
                 progressDialog.dismiss()
