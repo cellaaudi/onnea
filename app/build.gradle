@@ -24,7 +24,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\""
         signingConfig signingConfigs.debug
     }
 
@@ -32,11 +31,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-            buildConfigField "String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\""
-        }
-        debug {
-            buildConfigField "String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\""
         }
     }
     compileOptions {
@@ -86,4 +80,6 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+
+    implementation 'pub.devrel:easypermissions:3.0.0'
 }

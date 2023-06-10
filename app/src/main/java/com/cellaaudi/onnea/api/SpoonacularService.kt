@@ -12,7 +12,8 @@ interface SpoonacularService {
     @GET("recipes/complexSearch")
     fun searchFood(
         @Query("apiKey") apiKey: String = API_KEY,
-        @Query("query") query: String
+        @Query("query") query: String,
+        @Query("number") number: Int = 50
     ): Call<SearchFoodResponse>
 
     companion object {

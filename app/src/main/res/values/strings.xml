@@ -107,12 +107,17 @@
     <string name="search_for_food">Search for food</string>
     <string name="search_name">Food\'s name</string>
     <string name="search_photo">Food\'s photo</string>
+    <string name="camera">Add from Camera</string>
+    <string name="gallery">Add from Gallery</string>
 
     <!--    Catering-->
     <string name="catering_name">Catering\'s Name</string>
     <string name="catering_loc">Catering\'s Location</string>
     <string name="catering_rate">Catering\'s Rate</string>
     <string name="catering_rate_icon">Catering\'s Rate Icon</string>
+
+    <!--    Add-->
+    <string name="a_food_name">Food\'s name</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

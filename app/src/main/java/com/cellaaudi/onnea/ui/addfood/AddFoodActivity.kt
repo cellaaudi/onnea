@@ -1,5 +1,6 @@
 package com.cellaaudi.onnea.ui.addfood
 
+import android.Manifest
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
@@ -17,6 +18,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import com.cellaaudi.onnea.databinding.ActivityAddFoodBinding
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -24,7 +27,7 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddFoodActivity : AppCompatActivity() {
+class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     private var _binding: ActivityAddFoodBinding? = null
     private val binding get() = _binding
@@ -39,6 +42,7 @@ class AddFoodActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
         context = this
+        supportActionBar?.hide()
 
         binding?.btnCamera?.setOnClickListener {
             startCamera()
@@ -48,6 +52,36 @@ class AddFoodActivity : AppCompatActivity() {
             startGallery()
         }
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        if (requestCode == CAMERA_PERMISSION) {
+            startCamera()
+        } else if (requestCode == STORAGE_PERMISSION) {
+            startGallery()
+        }
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            AppSettingsDialog.Builder(this).build().show()
+        } else {
+            Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun hasCameraPermission() = EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)
+
+    private fun hasStoragePermission() = EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE)
 
     private val launchIntentCamera = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -66,28 +100,38 @@ class AddFoodActivity : AppCompatActivity() {
                 }
                 val rotate = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height,  matrix, true)
                 getFile = createTempFileFromBitmap(rotate, context)
+                val uri = Uri.fromFile(getFile)
 
                 val intent = Intent(this, FoodImageActivity::class.java)
-                intent.putExtra("imageBitmap", rotate)
+                intent.putExtra("imageUri", uri.toString())
                 startActivity(intent)
             }
         }
     }
 
     private fun startCamera() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        intent.resolveActivity(packageManager)
+        if (hasCameraPermission()) {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            intent.resolveActivity(packageManager)
 
-        createCustomTempFile(application).also {
-            val uri: Uri = FileProvider.getUriForFile(
-                this@AddFoodActivity,
-                "com.cellaaudi.onnea",
-                it
+            createCustomTempFile(application).also {
+                val uri: Uri = FileProvider.getUriForFile(
+                    this@AddFoodActivity,
+                    "com.cellaaudi.onnea",
+                    it
+                )
+
+                currentPhotoPath = it.absolutePath
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+                launchIntentCamera.launch(intent)
+            }
+        } else {
+            EasyPermissions.requestPermissions(
+                this,
+                "Onnea needs permission to access camera",
+                CAMERA_PERMISSION,
+                Manifest.permission.CAMERA
             )
-
-            currentPhotoPath = it.absolutePath
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-            launchIntentCamera.launch(intent)
         }
     }
 
@@ -107,10 +151,19 @@ class AddFoodActivity : AppCompatActivity() {
     }
 
     private fun startGallery() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
-        val chooser = Intent.createChooser(intent, "Choose a Picture")
-        launcherIntentGallery.launch(chooser)
+//        if (hasStoragePermission()) {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            val chooser = Intent.createChooser(intent, "Choose a Picture")
+            launcherIntentGallery.launch(chooser)
+//        } else {
+//            EasyPermissions.requestPermissions(
+//                this,
+//                "Onnea needs permission to access gallery",
+//                STORAGE_PERMISSION,
+//                Manifest.permission.READ_EXTERNAL_STORAGE
+//            )
+//        }
     }
 
     private fun createCustomTempFile(context: Context): File {
@@ -150,5 +203,10 @@ class AddFoodActivity : AppCompatActivity() {
         inputStream.close()
 
         return myFile
+    }
+
+    companion object {
+        private const val CAMERA_PERMISSION = 1
+        private const val  STORAGE_PERMISSION = 2
     }
 }

@@ -7,10 +7,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class ApiConfig {
-
+class MLConfig {
     companion object {
-        fun getApiService(): ApiService {
+        fun getApiService(): MLService {
             val loggingInterceptor = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             } else {
@@ -24,12 +23,12 @@ class ApiConfig {
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://ubaya.fun/native/160420004/onnea/")
+                .baseUrl("https://foodrecognitionfixed-7bz73s332a-as.a.run.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
 
-            return retrofit.create(ApiService::class.java)
+            return retrofit.create(MLService::class.java)
         }
     }
 }

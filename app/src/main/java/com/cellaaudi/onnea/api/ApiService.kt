@@ -1,5 +1,6 @@
 package com.cellaaudi.onnea.api
 
+import com.cellaaudi.onnea.model.FoodNameResponse
 import com.cellaaudi.onnea.model.RegisterResponse
 import com.cellaaudi.onnea.model.SearchUserResponse
 import okhttp3.MultipartBody
@@ -24,9 +25,9 @@ interface ApiService {
         @Field("email") email: String
     ): Call<SearchUserResponse>
 
-//    @Multipart
-//    @POST("foodRecognition")
-//    fun addFood(
-//        @Part file: MultipartBody.Part
-//    ): Call<>
+    @FormUrlEncoded
+    @POST("foodname.php")
+    fun getFood(
+        @Field("food_id") food_id: Int
+    ): Call<FoodNameResponse>
 }
