@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentQ3Binding
 
@@ -45,6 +46,8 @@ class Q3Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val viewModel = ViewModelProvider(requireActivity()).get(AnswerViewModel::class.java)
 
         binding.tbWeight.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -91,6 +94,9 @@ class Q3Fragment : Fragment() {
         })
 
         binding.btnQ3.setOnClickListener {
+            viewModel.weight = binding.tbWeight.text.toString()
+            viewModel.height = binding.tbHeight.text.toString()
+
             val q4Fragment = Q4Fragment()
 
             val fm = parentFragmentManager

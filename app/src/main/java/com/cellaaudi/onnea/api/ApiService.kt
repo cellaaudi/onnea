@@ -1,7 +1,7 @@
 package com.cellaaudi.onnea.api
 
 import com.cellaaudi.onnea.model.FoodNameResponse
-import com.cellaaudi.onnea.model.RegisterResponse
+import com.cellaaudi.onnea.model.OnlyBooleanResponse
 import com.cellaaudi.onnea.model.SearchUserResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -18,7 +18,7 @@ interface ApiService {
         @Part("name") name: RequestBody,
         @Part photo: MultipartBody.Part,
         @Part("timestamp") timestamp: RequestBody
-    ): Call<RegisterResponse>
+    ): Call<OnlyBooleanResponse>
 
     @POST("searchuser.php")
     fun searchUser(

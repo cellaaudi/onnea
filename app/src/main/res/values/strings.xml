@@ -12,6 +12,8 @@
     <string name="u_email">Email</string>
     <string name="u_password">Password</string>
     <string name="u_password_2">Repeat Password</string>
+    <string name="pass_diff">Your repeated password is different</string>
+    <string name="email_valid">Please enter valid email</string>
 
     <!--    Navigation & Description-->
     <string name="title_home">Home</string>
@@ -48,6 +50,7 @@
     <string name="ml">00 ml</string>
 
     <!--    Questions-->
+    <string name="q_name">What is your name?</string>
     <string name="q_date_of_birth">When were you born?</string>
     <string name="q_date_format">DD MM YYYY</string>
     <string name="q_gender">What is your gender?</string>
@@ -59,8 +62,8 @@
     <string name="q_cm">cm</string>
     <string name="q_physic">How physically active are you in your daily life?</string>
     <string name="q_physic_1">Not Active</string>
-    <string name="q_physic_2">Light Activity</string>
-    <string name="q_physic_3">Moderate Activity</string>
+    <string name="q_physic_2">Light Active</string>
+    <string name="q_physic_3">Moderate Active</string>
     <string name="q_physic_4">Active</string>
     <string name="q_physic_5">Very Active</string>
     <string name="q_goal">What is your weight-related goals?</string>

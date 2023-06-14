@@ -1,13 +1,10 @@
 package com.cellaaudi.onnea.ui.register
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.cellaaudi.onnea.api.ApiConfig
-import com.cellaaudi.onnea.model.RegisterResponse
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import com.cellaaudi.onnea.api.MLConfig
+import com.cellaaudi.onnea.model.OnlyBooleanResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,27 +17,30 @@ class RegisterViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun register(email: RequestBody, password: RequestBody, name: RequestBody, photo: MultipartBody.Part, timestamp: RequestBody) {
+    fun register(id: String) {
         _isLoading.value = true
-        val client = ApiConfig.getApiService().register(email, password, name, photo, timestamp)
+        val client = MLConfig.getApiService().register(id)
 
-        client.enqueue(object : Callback<RegisterResponse> {
+        client.enqueue(object : Callback<OnlyBooleanResponse> {
             override fun onResponse(
-                call: Call<RegisterResponse>,
-                response: Response<RegisterResponse>
+                call: Call<OnlyBooleanResponse>,
+                response: Response<OnlyBooleanResponse>
             ) {
                 _isLoading.value = false
 
                 if (response.isSuccessful) {
-                    _registerMsg.postValue(response.body()?.message)
+                    if (response.body()?.message == true) {
+                        _registerMsg.value = "Register success. Please login."
+                    } else {
+                        _registerMsg.value = "Register failed. Please try again."
+                    }
                 }
             }
 
-            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+            override fun onFailure(call: Call<OnlyBooleanResponse>, t: Throwable) {
                 _isLoading.value = false
-                Log.e(TAG, "onFailure: ${t.message.toString()}")
+                _registerMsg.value = "Register failed. Please try again."
             }
-
         })
     }
 

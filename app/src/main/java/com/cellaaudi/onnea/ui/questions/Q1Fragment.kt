@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentQ1Binding
 import java.text.SimpleDateFormat
@@ -28,6 +29,8 @@ class Q1Fragment : Fragment() {
     private val binding get() = _binding!!
 
     val dateFormat = SimpleDateFormat("dd MMMM yyyy")
+
+    private var age: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +55,8 @@ class Q1Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val viewModel = ViewModelProvider(requireActivity()).get(AnswerViewModel::class.java)
 
         binding.tbBirthDate.setOnClickListener {
             val today = Calendar.getInstance()
@@ -99,7 +104,7 @@ class Q1Fragment : Fragment() {
                     val day = calBday.get(Calendar.DAY_OF_MONTH)
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        val age = Period.between(
+                        age = Period.between(
                             LocalDate.of(year, month, day),
                             LocalDate.now()
                         ).years
@@ -115,6 +120,8 @@ class Q1Fragment : Fragment() {
         })
 
         binding.btnQ1.setOnClickListener {
+            viewModel.birthdate = age.toString()
+
             val q2Fragment = Q2Fragment()
 
             val fm = parentFragmentManager

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentQ6Binding
 
@@ -18,6 +19,8 @@ class Q6Fragment : Fragment() {
 
     private var _binding: FragmentQ6Binding? = null
     private val binding get() = _binding!!
+
+    private var diet: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +44,14 @@ class Q6Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val viewModel = ViewModelProvider(requireActivity()).get(AnswerViewModel::class.java)
+
         binding.rdoHabit.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.rdoVegetarian ->
+                    diet = "Vegetarian"
+            }
+
             binding.btnQ6.isClickable = true
             binding.btnQ6.isEnabled = true
         }

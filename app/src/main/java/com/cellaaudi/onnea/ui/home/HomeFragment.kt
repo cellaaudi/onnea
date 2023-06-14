@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentHomeBinding
 import com.cellaaudi.onnea.ui.addfood.AddFoodActivity
+import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,10 +26,12 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel: HomeViewModel by viewModels()
+
+    private lateinit var auth: FirebaseAuth
+
     @SuppressLint("SimpleDateFormat")
     val dateFormat = SimpleDateFormat("dd MMMM yyyy")
-
-    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +40,8 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        auth = FirebaseAuth.getInstance()
 
         binding.txtDay.text = dateFormat.format(getToday())
         binding.btnNext.visibility = View.INVISIBLE
@@ -95,6 +102,31 @@ class HomeFragment : Fragment() {
             picker.show()
         }
 
+        binding.txtDay.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Do nothing
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val (day, month) = getDateMonthNum(s.toString())
+                val uid = auth.currentUser?.uid
+
+                if (uid != null) {
+                    viewModel.getRecommendation(uid, day.toString(), month.toString())
+                }
+
+                viewModel.food.observe(viewLifecycleOwner) { recommendation ->
+                    if (recommendation.breakfast != null) {
+                        binding.txtBreakfast.text = recommendation.breakfast[1].name
+                    }
+                }
+            }
+        })
+
         binding.btnAddBreakfast.setOnClickListener {
             val intent = Intent(requireContext(), AddFoodActivity::class.java)
             startActivity(intent)
@@ -120,6 +152,17 @@ class HomeFragment : Fragment() {
         }
 
         return cal.time
+    }
+
+    private fun getDateMonthNum(displayedDay: String): Pair<Int, Int> {
+        val displayed = dateFormat.parse(displayedDay)
+        val cal = Calendar.getInstance()
+        cal.time = displayed
+
+        val date = cal.get(Calendar.DAY_OF_MONTH)
+        val month = cal.get(Calendar.MONTH) + 1
+
+        return Pair(date, month)
     }
 
     private fun changeDay(displayedDay: String, button: String): Date {

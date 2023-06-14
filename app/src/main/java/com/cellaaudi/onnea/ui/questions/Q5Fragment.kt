@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentQ5Binding
 
@@ -18,6 +19,8 @@ class Q5Fragment : Fragment() {
 
     private var _binding: FragmentQ5Binding? = null
     private val binding get() = _binding!!
+
+    private var goal: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +44,25 @@ class Q5Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val viewModel = ViewModelProvider(requireActivity()).get(AnswerViewModel::class.java)
+
         binding.rdoGoal.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.rdoLose ->
+                    goal = "Losing Weight"
+                R.id.rdoMaintain ->
+                    goal = "Maintaining Weight"
+                R.id.rdoGain ->
+                    goal = "Gaining Weight"
+            }
+
             binding.btnQ5.isEnabled = true
             binding.btnQ5.isClickable = true
         }
 
         binding.btnQ5.setOnClickListener {
+            viewModel.goal = goal
+
             val q6Fragment = Q6Fragment()
 
             val fm = parentFragmentManager

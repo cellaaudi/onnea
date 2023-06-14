@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentQ2Binding
 
@@ -18,6 +19,8 @@ class Q2Fragment : Fragment() {
 
     private var _binding: FragmentQ2Binding? = null
     private val binding get() = _binding!!
+
+    private var gender: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +44,13 @@ class Q2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val viewModel = ViewModelProvider(requireActivity()).get(AnswerViewModel::class.java)
+
         binding.rdoGroup.setOnCheckedChangeListener { group, checkedId ->
-            var gender: String = ""
             if (checkedId == R.id.rdoMale) {
-                gender = "male"
+                gender = "Male"
             } else if (checkedId == R.id.rdoFemale) {
-                gender = "female"
+                gender = "Female"
             }
 
             binding.btnQ2.text = "Yes, I'm a $gender"
@@ -55,6 +59,7 @@ class Q2Fragment : Fragment() {
         }
 
         binding.btnQ2.setOnClickListener {
+            viewModel.gender = gender
             val q3Fragment = Q3Fragment()
 
             val fm = parentFragmentManager

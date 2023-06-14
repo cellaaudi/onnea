@@ -23,7 +23,7 @@ class MLConfig {
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://foodrecognitionfixed-7bz73s332a-as.a.run.app/")
+                .baseUrl("https://onneaapi-7ar7ppkgsa-as.a.run.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
