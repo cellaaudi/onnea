@@ -2,6 +2,8 @@
 
 This repository contains scripts for building a recommendation system that provides personalized food recommendations to users based on their preferences. The system takes into account both user characteristics (such as age, gender, and weight) and food attributes (such as calories, protein, and fat).
 
+Data is gathered from google form survey
+
 ## Description
 
 The recommendation model is trained using a neural network approach. The model architecture includes separate sub-networks for users and items (foods) which transform the raw feature inputs into a shared latent space. The similarity between a user and an item is then computed as the dot product between their latent vectors.
