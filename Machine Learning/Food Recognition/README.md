@@ -2,6 +2,8 @@
 
 This is a simple yet powerful model for food recognition. It utilizes a transfer learning approach based on EfficientNetV2-B2, a state-of-the-art convolutional neural network architecture for image classification.
 
+Link for the data used: http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz
+
 The steps taken in this model are as follows:
 
 ## 1. Import Dependencies
