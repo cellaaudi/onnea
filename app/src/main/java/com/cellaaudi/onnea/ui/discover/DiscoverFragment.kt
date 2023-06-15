@@ -65,7 +65,7 @@ class DiscoverFragment : Fragment() {
                 val lm = LinearLayoutManager(requireContext())
                 binding.rvFood.layoutManager = lm
                 viewModel.search.observe(requireActivity()) { query ->
-                    val listFood = SearchFoodAdapter(query)
+                    val listFood = SearchFoodAdapter(query.results)
                     binding.rvFood.adapter = listFood
                 }
 

@@ -14,7 +14,7 @@ import com.cellaaudi.onnea.model.ResultsItem
 import com.cellaaudi.onnea.model.SearchFoodResponse
 import com.cellaaudi.onnea.ui.fooddetail.FoodDetailActivity
 
-class SearchFoodAdapter(private val food: SearchFoodResponse): RecyclerView.Adapter<SearchFoodAdapter.ViewHolder>() {
+class SearchFoodAdapter(private val food: List<ResultsItem>): RecyclerView.Adapter<SearchFoodAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -41,8 +41,8 @@ class SearchFoodAdapter(private val food: SearchFoodResponse): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(food.results[position])
+        holder.bind(food[position])
     }
 
-    override fun getItemCount(): Int = food.results.size
+    override fun getItemCount(): Int = food.size
 }
