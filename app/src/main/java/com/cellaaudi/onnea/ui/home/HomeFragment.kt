@@ -13,13 +13,13 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.cellaaudi.onnea.R
+import com.bumptech.glide.Glide
 import com.cellaaudi.onnea.databinding.FragmentHomeBinding
 import com.cellaaudi.onnea.ui.addfood.AddFoodActivity
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.round
 
 class HomeFragment : Fragment() {
 
@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     private lateinit var auth: FirebaseAuth
+    private var uid: String? = null
 
     @SuppressLint("SimpleDateFormat")
     val dateFormat = SimpleDateFormat("dd MMMM yyyy")
@@ -42,6 +43,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         auth = FirebaseAuth.getInstance()
+        uid = auth.currentUser?.uid
 
         binding.txtDay.text = dateFormat.format(getToday())
         binding.btnNext.visibility = View.INVISIBLE
@@ -55,6 +57,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        uid?.let { getRecommendation(it, binding.txtDay.text.toString()) }
 
         binding.btnPrev.setOnClickListener {
             val button = "prev"
@@ -87,7 +91,7 @@ class HomeFragment : Fragment() {
             val month = cal.get(Calendar.MONTH)
             val day = cal.get(Calendar.DAY_OF_MONTH)
 
-            var picker = DatePickerDialog(requireContext(),
+            val picker = DatePickerDialog(requireContext(),
                 DatePickerDialog.OnDateSetListener { datePicker, selYear, selMonth, selDay ->
                     val calendar = Calendar.getInstance()
                     calendar.set(selYear, selMonth, selDay)
@@ -112,18 +116,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val (day, month) = getDateMonthNum(s.toString())
-                val uid = auth.currentUser?.uid
-
-                if (uid != null) {
-                    viewModel.getRecommendation(uid, day.toString(), month.toString())
-                }
-
-                viewModel.food.observe(viewLifecycleOwner) { recommendation ->
-                    if (recommendation.breakfast != null) {
-                        binding.txtBreakfast.text = recommendation.breakfast[1].name
-                    }
-                }
+                showLoadingR()
+                uid?.let { getRecommendation(it, s.toString()) }
             }
         })
 
@@ -176,5 +170,58 @@ class HomeFragment : Fragment() {
         viewModel.setDate(cal.time)
 
         return cal.time
+    }
+
+    private fun showLoadingR() {
+        viewModel.isLoading.observe(requireActivity()) { load ->
+            binding.pbBR.visibility = if (load) View.VISIBLE else View.GONE
+            binding.pbLR.visibility = if (load) View.VISIBLE else View.GONE
+            binding.pbDR.visibility = if (load) View.VISIBLE else View.GONE
+
+            binding.btnAddBreakfastR.isClickable = !load
+            binding.btnAddBreakfastR.isEnabled = !load
+            binding.btnAddLunchR.isClickable = !load
+            binding.btnAddLunchR.isEnabled = !load
+            binding.btnAddDinnerR.isClickable = !load
+            binding.btnAddDinnerR.isEnabled = !load
+        }
+    }
+
+    private fun getRecommendation(id: String, date: String) {
+        val (day, month) = getDateMonthNum(date)
+
+        showLoadingR()
+
+        viewModel.getRecommendation(id, day.toString(), month.toString())
+
+        viewModel.food.observe(viewLifecycleOwner) { recommendation ->
+            if (recommendation.breakfast != null) {
+                Glide.with(requireContext())
+                    .load(recommendation.breakfast[2].link)
+                    .into(binding.imgBreakR)
+                binding.txtBreakNameR.text = recommendation.breakfast[1].name
+                binding.txtBreakCalR.text = "${round(recommendation.breakfast[4].calories.toDouble()).toInt()} kcal"
+            }
+
+            if (recommendation.lunch != null) {
+                Glide.with(requireContext())
+                    .load(recommendation.lunch[2].link)
+                    .into(binding.imgLunchR)
+                binding.txtLunchNameR.text = recommendation.lunch[1].name
+                binding.txtLunchCalR.text = "${round(recommendation.lunch[4].calories.toDouble()).toInt()} kcal"
+            }
+
+            if (recommendation.dinner != null) {
+                Glide.with(requireContext())
+                    .load(recommendation.dinner[2].link)
+                    .into(binding.imgDinnerR)
+                binding.txtDinnerNameR.text = recommendation.dinner[1].name
+                binding.txtDinnerCalR.text = "${round(recommendation.dinner[4].calories.toDouble()).toInt()} kcal"
+            }
+        }
+
+        viewModel.recMsg.observe(requireActivity()) { msg ->
+            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -1,10 +1,9 @@
 package com.cellaaudi.onnea.api
 
-import com.cellaaudi.onnea.model.ResultsItem
 import com.cellaaudi.onnea.model.SearchFoodResponse
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SpoonacularService {
@@ -14,6 +13,12 @@ interface SpoonacularService {
         @Query("apiKey") apiKey: String = API_KEY,
         @Query("query") query: String,
         @Query("number") number: Int = 50
+    ): Call<SearchFoodResponse>
+
+    @GET("recipes/{id}/information?includeNutrition=false")
+    fun getFoodDetail(
+        @Query("apiKey") apiKey: String = API_KEY,
+        @Path("id") id: String
     ): Call<SearchFoodResponse>
 
     companion object {

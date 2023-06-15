@@ -20,4 +20,8 @@ class FoodDetailActivity : AppCompatActivity() {
         _binding = ActivityFoodDetailBinding.inflate(layoutInflater)
         setContentView(binding?.root)
     }
+
+    companion object {
+        var FOOD_ID = "food_id"
+    }
 }

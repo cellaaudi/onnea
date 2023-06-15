@@ -1,5 +1,6 @@
 package com.cellaaudi.onnea.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.ItemFoodBinding
 import com.cellaaudi.onnea.model.ResultsItem
 import com.cellaaudi.onnea.model.SearchFoodResponse
+import com.cellaaudi.onnea.ui.fooddetail.FoodDetailActivity
 
 class SearchFoodAdapter(private val food: SearchFoodResponse): RecyclerView.Adapter<SearchFoodAdapter.ViewHolder>() {
 
@@ -24,6 +26,12 @@ class SearchFoodAdapter(private val food: SearchFoodResponse): RecyclerView.Adap
                 .load(foodItem.image)
                 .into(imgFood)
             txtFood.text = foodItem.title
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, FoodDetailActivity::class.java)
+                intent.putExtra(FoodDetailActivity.FOOD_ID, foodItem.id)
+                itemView.context.startActivity(intent)
+            }
         }
     }
 

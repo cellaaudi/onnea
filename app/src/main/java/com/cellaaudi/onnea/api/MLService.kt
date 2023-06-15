@@ -41,6 +41,14 @@ interface MLService {
         @Query("month") month: String
     ): Call<RecommendationResponse>
 
+    @GET("updateeaten")
+    fun updateEaten(
+        @Query("id") id: String,
+        @Query("day") day: String,
+        @Query("month") month: String,
+        @Query("type") type: String
+    ): Call<OnlyBooleanResponse>
+
     @GET("getuserdata")
     fun getUser(
         @Query("id") id: String

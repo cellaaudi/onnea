@@ -48,6 +48,7 @@
     <string name="food_name">Food name</string>
     <string name="kcal">00 kcal</string>
     <string name="ml">00 ml</string>
+    <string name="title_recommendations">Food You Might Like</string>
 
     <!--    Questions-->
     <string name="q_name">What is your name?</string>
