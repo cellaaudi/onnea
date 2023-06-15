@@ -116,7 +116,7 @@
                         style="@style/RegularText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/kcal"
+                        android:text="@string/kcal2"
                         app:layout_constraintBottom_toBottomOf="@+id/txtTakenCal"
                         app:layout_constraintStart_toEndOf="@+id/txtTakenCal" />
 
@@ -175,7 +175,7 @@
                         style="@style/DescText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/g"
+                        android:text="@string/g2"
                         app:layout_constraintBottom_toBottomOf="@+id/txtTakenCarb"
                         app:layout_constraintStart_toEndOf="@+id/txtTakenCarb" />
 
@@ -204,7 +204,7 @@
                         style="@style/DescText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/g"
+                        android:text="@string/g2"
                         app:layout_constraintBottom_toBottomOf="@+id/txtTakenProt"
                         app:layout_constraintStart_toEndOf="@+id/txtTakenProt" />
 
@@ -222,7 +222,7 @@
                         style="@style/DescText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/g"
+                        android:text="@string/g2"
                         app:layout_constraintBottom_toBottomOf="@+id/txtTakenFat"
                         app:layout_constraintStart_toEndOf="@+id/txtTakenFat" />
 

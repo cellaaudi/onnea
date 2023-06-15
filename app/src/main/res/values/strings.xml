@@ -48,6 +48,8 @@
     <string name="food_name">Food name</string>
     <string name="kcal">00 kcal</string>
     <string name="g">00 g</string>
+    <string name="kcal2"> / 00 kcal</string>
+    <string name="g2"> / 00 g</string>
     <string name="title_recommendations">Food You Might Like</string>
     <string name="calories">Calories</string>
     <string name="carbs">Carbs</string>

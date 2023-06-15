@@ -40,12 +40,15 @@ class HomeViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
+    private val _isLoadingN = MutableLiveData<Boolean>()
+    val isLoadingN: LiveData<Boolean> get() = _isLoadingN
+
     fun setDate(selDate: Date) {
         _date.value = selDate
     }
 
     fun getNutrition(id: String) {
-        _isLoading.value = true
+        _isLoadingN.value = true
         val client = MLConfig.getApiService().getNutrition(id)
 
         client.enqueue(object : Callback<NutritionResponse> {
@@ -53,7 +56,7 @@ class HomeViewModel : ViewModel() {
                 call: Call<NutritionResponse>,
                 response: Response<NutritionResponse>
             ) {
-                _isLoading.value = false
+                _isLoadingN.value = false
 
                 if (response.isSuccessful) {
                     _nutrition.value = response.body()
@@ -63,7 +66,7 @@ class HomeViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<NutritionResponse>, t: Throwable) {
-                _isLoading.value = false
+                _isLoadingN.value = false
                 _nutrMsg.value = "There was an error retrieving nutrition data."
             }
         })

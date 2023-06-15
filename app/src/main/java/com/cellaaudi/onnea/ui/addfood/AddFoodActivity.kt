@@ -14,9 +14,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.content.FileProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.cellaaudi.onnea.adapter.AddFoodAdapter
+import com.cellaaudi.onnea.adapter.SearchFoodAdapter
 import com.cellaaudi.onnea.databinding.ActivityAddFoodBinding
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -32,9 +38,15 @@ class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
     private var _binding: ActivityAddFoodBinding? = null
     private val binding get() = _binding
 
+    private val viewModel: AddFoodViewModel by viewModels()
+
     private lateinit var currentPhotoPath: String
     private var getFile: File? = null
     private lateinit var context: Context
+
+    private var day = 0
+    private var month = 0
+    private var type = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +55,47 @@ class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
 
         context = this
         supportActionBar?.hide()
+
+        day = intent.getIntExtra(DAY, 1)
+        month = intent.getIntExtra(MONTH, 1)
+        type = intent.getStringExtra(TYPE).toString()
+
+        showLoading(false)
+
+        viewModel.load.observe(this) {
+            showLoading(it)
+        }
+
+        binding?.searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.load.observe(this@AddFoodActivity) {
+                    showLoading(it)
+                }
+
+                binding?.viewFlipper?.displayedChild = binding?.viewFlipper!!.indexOfChild(binding?.layoutSearch)
+
+                viewModel.search(query.toString())
+                binding?.rvFood?.setHasFixedSize(true)
+                val lm = LinearLayoutManager(this@AddFoodActivity)
+                binding?.rvFood?.layoutManager = lm
+                viewModel.search.observe(this@AddFoodActivity) { query ->
+                    val listFood = AddFoodAdapter(query.results, day, month, type)
+                    binding?.rvFood?.adapter = listFood
+                }
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrEmpty()) {
+                    binding?.viewFlipper?.displayedChild = binding?.viewFlipper!!.indexOfChild(binding?.scDiscover)
+
+                    return false
+                }
+
+                return false
+            }
+        })
 
         binding?.btnCamera?.setOnClickListener {
             startCamera()
@@ -205,8 +258,16 @@ class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
         return myFile
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        binding?.pbSearchFood?.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
     companion object {
         private const val CAMERA_PERMISSION = 1
         private const val  STORAGE_PERMISSION = 2
+
+        var DAY = "day"
+        var MONTH = "month"
+        var TYPE = "type"
     }
 }

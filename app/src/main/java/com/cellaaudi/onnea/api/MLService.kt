@@ -51,6 +51,22 @@ interface MLService {
         @Query("id") id: String
     ): Call<NutritionResponse>
 
+    @GET("updatefoodday")
+    fun updateFood(
+        @Query("uid") uid: String,
+        @Query("id") id: String,
+        @Query("day") day: String,
+        @Query("month") month: String,
+        @Query("name") name: String,
+        @Query("link") link: String,
+        @Query("type") type: String,
+        @Query("calories") calories: String,
+        @Query("imagetype") imagetype: String,
+        @Query("protein") protein: String,
+        @Query("carbohydrates") carbohydrates: String,
+        @Query("fat") fat: String
+    ): Call<OnlyBooleanResponse>
+
     @GET("getuserdata")
     fun getUser(
         @Query("id") id: String

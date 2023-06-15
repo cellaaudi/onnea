@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,15 @@ class HomeFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
 
+    var calTaken = 0
+    var carbTaken = 0
+    var protTaken = 0
+    var fatTaken = 0
+
+    var bLoaded = false
+    var lLoaded = false
+    var dLoaded = false
+
     @SuppressLint("SimpleDateFormat")
     val dateFormat = SimpleDateFormat("dd MMMM yyyy")
 
@@ -43,12 +53,17 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         auth = FirebaseAuth.getInstance()
+        val uid = auth.currentUser?.uid
 
         binding.txtDay.text = dateFormat.format(getToday())
         binding.btnNext.visibility = View.INVISIBLE
 
         viewModel.date.observe(viewLifecycleOwner) { selDate ->
             binding.txtDay.text = dateFormat.format(selDate)
+        }
+
+        if (uid != null) {
+            getNutrition(uid)
         }
 
         return root
@@ -129,7 +144,12 @@ class HomeFragment : Fragment() {
         })
 
         binding.btnAddBreakfast.setOnClickListener {
+            val (day, momth) = getDateMonthNum(binding.txtDay.text.toString())
+            val type = "Breakfast"
             val intent = Intent(requireContext(), AddFoodActivity::class.java)
+            intent.putExtra(AddFoodActivity.DAY, day.toString())
+            intent.putExtra(AddFoodActivity.MONTH, momth.toString())
+            intent.putExtra(AddFoodActivity.TYPE, type)
             startActivity(intent)
         }
 
@@ -232,10 +252,37 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun getNutrition(id: String) {
+        viewModel.getNutrition(id)
+
+        viewModel.nutrition.observe(viewLifecycleOwner) { nutrition ->
+            if (nutrition != null) {
+                if (bLoaded && lLoaded && dLoaded) {
+                    binding.txtTakenCal.text = calTaken.toString()
+                    binding.txtTakenCarb.text = carbTaken.toString()
+                    binding.txtTakenProt.text = protTaken.toString()
+                    binding.txtTakenFat.text = fatTaken.toString()
+                }
+
+                val calNeeded = str2Int(nutrition.calories)
+                val carbNeeded = str2Int(nutrition.carbohydrates)
+                val protNeeded = str2Int(nutrition.protein)
+                val fatNeeded = str2Int(nutrition.fat)
+
+                binding.txtNeededCal.text = " / $calNeeded kcal"
+                binding.txtNeededCarb.text = " / $carbNeeded g"
+                binding.txtNeededProt.text = " / $protNeeded g"
+                binding.txtNeededFat.text = " / $fatNeeded g"
+            }
+        }
+
+        viewModel.isLoadingN.observe(requireActivity()) {
+            binding.pbNutrition.visibility = if (it) View.VISIBLE else View.GONE
+        }
+    }
+
     private fun getRecommendation(id: String, date: String) {
         val (day, month) = getDateMonthNum(date)
-
-        Toast.makeText(requireContext(), "$day $month", Toast.LENGTH_SHORT).show()
 
         showLoading()
 
@@ -243,20 +290,28 @@ class HomeFragment : Fragment() {
 
         viewModel.food.observe(viewLifecycleOwner) { recommendation ->
             if (recommendation.breakfast != null) {
+                val cal = str2Int(recommendation.breakfast[4].calories)
+                val carb = str2Int(recommendation.breakfast[7].carbohydrates)
+                val prot = str2Int(recommendation.breakfast[5].protein)
+                val fat = str2Int(recommendation.breakfast[6].fat)
+
                 Glide.with(requireContext())
                     .load(recommendation.breakfast[2].link)
                     .into(binding.imgBreakR)
                 binding.txtBreakNameR.text = recommendation.breakfast[1].name
-                binding.txtBreakCalR.text =
-                    "${round(recommendation.breakfast[4].calories.toDouble()).toInt()} kcal"
+                binding.txtBreakCalR.text = "$cal kcal"
 
                 if (recommendation.breakfast[8].eat) {
+                    calTaken += cal
+                    carbTaken += carb
+                    protTaken += prot
+                    fatTaken += fat
+
                     Glide.with(requireContext())
                         .load(recommendation.breakfast[2].link)
                         .into(binding.imgBreak)
                     binding.txtBreakName.text = recommendation.breakfast[1].name
-                    binding.txtBreakCal.text =
-                        "${round(recommendation.breakfast[4].calories.toDouble()).toInt()} kcal"
+                    binding.txtBreakCal.text = "$cal kcal"
                     binding.btnAddBreakfast.setImageResource(R.drawable.ic_round_edit_24)
 
                     binding.cardBreakfastR.visibility = View.GONE
@@ -268,22 +323,33 @@ class HomeFragment : Fragment() {
 
                     binding.cardBreakfastR.visibility = View.VISIBLE
                 }
+
+                bLoaded = true
             }
 
             if (recommendation.lunch != null) {
+                val cal = str2Int(recommendation.lunch[4].calories)
+                val carb = str2Int(recommendation.lunch[7].carbohydrates)
+                val prot = str2Int(recommendation.lunch[5].protein)
+                val fat = str2Int(recommendation.lunch[6].fat)
+
                 Glide.with(requireContext())
                     .load(recommendation.lunch[2].link)
                     .into(binding.imgLunchR)
                 binding.txtLunchNameR.text = recommendation.lunch[1].name
-                binding.txtLunchCalR.text = "${round(recommendation.lunch[4].calories.toDouble()).toInt()} kcal"
+                binding.txtLunchCalR.text = "$cal kcal"
 
                 if (recommendation.lunch[8].eat) {
+                    calTaken += cal
+                    carbTaken += carb
+                    protTaken += prot
+                    fatTaken += fat
+
                     Glide.with(requireContext())
                         .load(recommendation.lunch[2].link)
                         .into(binding.imgLunch)
                     binding.txtLunchName.text = recommendation.lunch[1].name
-                    binding.txtLunchCal.text =
-                        "${round(recommendation.lunch[4].calories.toDouble()).toInt()} kcal"
+                    binding.txtLunchCal.text ="$cal kcal"
                     binding.btnAddLunch.setImageResource(R.drawable.ic_round_edit_24)
 
                     binding.cardLunchR.visibility = View.GONE
@@ -295,22 +361,28 @@ class HomeFragment : Fragment() {
 
                     binding.cardLunchR.visibility = View.VISIBLE
                 }
+
+                lLoaded = true
             }
 
             if (recommendation.dinner != null) {
+                val cal = str2Int(recommendation.dinner[4].calories)
+                val carb = str2Int(recommendation.dinner[7].carbohydrates)
+                val prot = str2Int(recommendation.dinner[5].protein)
+                val fat = str2Int(recommendation.dinner[6].fat)
+
                 Glide.with(requireContext())
                     .load(recommendation.dinner[2].link)
                     .into(binding.imgDinnerR)
                 binding.txtDinnerNameR.text = recommendation.dinner[1].name
-                binding.txtDinnerCalR.text = "${round(recommendation.dinner[4].calories.toDouble()).toInt()} kcal"
+                binding.txtDinnerCalR.text = "$cal kcal"
 
                 if (recommendation.dinner[8].eat) {
                     Glide.with(requireContext())
                         .load(recommendation.dinner[2].link)
                         .into(binding.imgDinner)
                     binding.txtDinnerName.text = recommendation.dinner[1].name
-                    binding.txtDinnerCal.text =
-                        "${round(recommendation.dinner[4].calories.toDouble()).toInt()} kcal"
+                    binding.txtDinnerCal.text = "$cal kcal"
                     binding.btnAddDinner.setImageResource(R.drawable.ic_round_edit_24)
 
                     binding.cardDinnerR.visibility = View.GONE
@@ -322,6 +394,8 @@ class HomeFragment : Fragment() {
 
                     binding.cardDinnerR.visibility = View.VISIBLE
                 }
+
+                dLoaded = true
             }
         }
 
@@ -345,4 +419,6 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun str2Int(str: String): Int = round(str.toDouble()).toInt()
 }
