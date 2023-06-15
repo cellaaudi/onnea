@@ -1,0 +1,8 @@
+numpy
+tensorflow
+pillow
+gunicorn
+Flask
+firebase-admin
+requests
+scikit-learn
