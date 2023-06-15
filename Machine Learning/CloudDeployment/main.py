@@ -470,8 +470,6 @@ def getquestion(id):
 
     
 def postquestion(id, activity, age, fruit, healthy, height, weight, name, gender, goals):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json')  
-    firebase_admin.initialize_app(cred)
 
     if gender == 'Male':
         bmr = 66.5 + (13.75 * int(weight)) + (5.003 * int(height)) - (6.75 * int(age))
@@ -698,8 +696,11 @@ def recalculate(id):
 def rating(uid, id):
 
     doc_ref = db.collection('users').document(str(uid)).collection('ratings').document('rate')
-
-    doc_ref.update({str(id): '5'})
+    doc = doc_ref.get()
+    if doc.exists:
+        doc_ref.update({str(id): '5'})
+    else:
+        doc_ref.set({str(id): '5'})
 
 
 
