@@ -12,8 +12,10 @@
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -28,6 +30,7 @@
                 android:layout_marginEnd="16dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
+                app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -75,17 +78,119 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="32dp"
                 android:padding="16dp"
-                android:text="@string/desc_add"
+                android:text="@string/add_food"
                 android:textAllCaps="false"
                 app:cornerRadius="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtTitleAdd"
+                app:layout_constraintTop_toBottomOf="@+id/txtFat"
                 app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/txtReadyAdd"
+                style="@style/DescText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/ready_in"
+                app:layout_constraintEnd_toEndOf="@+id/txtTitleAdd"
+                app:layout_constraintStart_toStartOf="@+id/txtTitleAdd"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitleAdd" />
+
+            <TextView
+                android:id="@+id/textView30"
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/nutrients"
+                app:layout_constraintStart_toStartOf="@+id/txtReadyAdd"
+                app:layout_constraintTop_toBottomOf="@+id/txtReadyAdd" />
+
+            <TextView
+                android:id="@+id/textView31"
+                style="@style/RegularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calories"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCal"
+                app:layout_constraintStart_toStartOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/txtCal"
+                style="@style/RegularText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/number"
+                app:layout_constraintEnd_toEndOf="@+id/txtReadyAdd"
+                app:layout_constraintStart_toEndOf="@+id/textView31"
+                app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/textView35"
+                style="@style/RegularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/carbo"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCarb"
+                app:layout_constraintStart_toStartOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/txtCarb"
+                style="@style/RegularText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/number"
+                app:layout_constraintEnd_toEndOf="@+id/txtCal"
+                app:layout_constraintStart_toEndOf="@+id/textView35"
+                app:layout_constraintTop_toBottomOf="@+id/txtCal" />
+
+            <TextView
+                android:id="@+id/textView37"
+                style="@style/RegularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/protein"
+                app:layout_constraintBottom_toBottomOf="@+id/txtProt"
+                app:layout_constraintStart_toStartOf="@+id/textView35" />
+
+            <TextView
+                android:id="@+id/txtProt"
+                style="@style/RegularText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/number"
+                app:layout_constraintEnd_toEndOf="@+id/txtCarb"
+                app:layout_constraintStart_toEndOf="@+id/textView37"
+                app:layout_constraintTop_toBottomOf="@+id/txtCarb" />
+
+            <TextView
+                android:id="@+id/textView39"
+                style="@style/RegularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fat"
+                app:layout_constraintBottom_toBottomOf="@+id/txtFat"
+                app:layout_constraintStart_toStartOf="@+id/textView37" />
+
+            <TextView
+                android:id="@+id/txtFat"
+                style="@style/RegularText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/number"
+                app:layout_constraintEnd_toEndOf="@+id/txtProt"
+                app:layout_constraintStart_toEndOf="@+id/textView39"
+                app:layout_constraintTop_toBottomOf="@+id/txtProt" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

@@ -32,14 +32,14 @@ class HomeFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
 
-    var calTaken = 0
-    var carbTaken = 0
-    var protTaken = 0
-    var fatTaken = 0
-
-    var bLoaded = false
-    var lLoaded = false
-    var dLoaded = false
+//    var calTaken = 0
+//    var carbTaken = 0
+//    var protTaken = 0
+//    var fatTaken = 0
+//
+//    var bLoaded = false
+//    var lLoaded = false
+//    var dLoaded = false
 
     @SuppressLint("SimpleDateFormat")
     val dateFormat = SimpleDateFormat("dd MMMM yyyy")
@@ -62,9 +62,9 @@ class HomeFragment : Fragment() {
             binding.txtDay.text = dateFormat.format(selDate)
         }
 
-        if (uid != null) {
-            getNutrition(uid)
-        }
+//        if (uid != null) {
+//            getNutrition(uid)
+//        }
 
         return root
     }
@@ -252,34 +252,34 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getNutrition(id: String) {
-        viewModel.getNutrition(id)
-
-        viewModel.nutrition.observe(viewLifecycleOwner) { nutrition ->
-            if (nutrition != null) {
-                if (bLoaded && lLoaded && dLoaded) {
-                    binding.txtTakenCal.text = calTaken.toString()
-                    binding.txtTakenCarb.text = carbTaken.toString()
-                    binding.txtTakenProt.text = protTaken.toString()
-                    binding.txtTakenFat.text = fatTaken.toString()
-                }
-
-                val calNeeded = str2Int(nutrition.calories)
-                val carbNeeded = str2Int(nutrition.carbohydrates)
-                val protNeeded = str2Int(nutrition.protein)
-                val fatNeeded = str2Int(nutrition.fat)
-
-                binding.txtNeededCal.text = " / $calNeeded kcal"
-                binding.txtNeededCarb.text = " / $carbNeeded g"
-                binding.txtNeededProt.text = " / $protNeeded g"
-                binding.txtNeededFat.text = " / $fatNeeded g"
-            }
-        }
-
-        viewModel.isLoadingN.observe(requireActivity()) {
-            binding.pbNutrition.visibility = if (it) View.VISIBLE else View.GONE
-        }
-    }
+//    private fun getNutrition(id: String) {
+//        viewModel.getNutrition(id)
+//
+//        viewModel.nutrition.observe(viewLifecycleOwner) { nutrition ->
+//            if (nutrition != null) {
+//                if (bLoaded && lLoaded && dLoaded) {
+//                    binding.txtTakenCal.text = calTaken.toString()
+//                    binding.txtTakenCarb.text = carbTaken.toString()
+//                    binding.txtTakenProt.text = protTaken.toString()
+//                    binding.txtTakenFat.text = fatTaken.toString()
+//                }
+//
+//                val calNeeded = str2Int(nutrition.calories)
+//                val carbNeeded = str2Int(nutrition.carbohydrates)
+//                val protNeeded = str2Int(nutrition.protein)
+//                val fatNeeded = str2Int(nutrition.fat)
+//
+//                binding.txtNeededCal.text = " / $calNeeded kcal"
+//                binding.txtNeededCarb.text = " / $carbNeeded g"
+//                binding.txtNeededProt.text = " / $protNeeded g"
+//                binding.txtNeededFat.text = " / $fatNeeded g"
+//            }
+//        }
+//
+//        viewModel.isLoadingN.observe(requireActivity()) {
+//            binding.pbNutrition.visibility = if (it) View.VISIBLE else View.GONE
+//        }
+//    }
 
     private fun getRecommendation(id: String, date: String) {
         val (day, month) = getDateMonthNum(date)
@@ -302,10 +302,10 @@ class HomeFragment : Fragment() {
                 binding.txtBreakCalR.text = "$cal kcal"
 
                 if (recommendation.breakfast[8].eat) {
-                    calTaken += cal
-                    carbTaken += carb
-                    protTaken += prot
-                    fatTaken += fat
+//                    calTaken += cal
+//                    carbTaken += carb
+//                    protTaken += prot
+//                    fatTaken += fat
 
                     Glide.with(requireContext())
                         .load(recommendation.breakfast[2].link)
@@ -324,7 +324,7 @@ class HomeFragment : Fragment() {
                     binding.cardBreakfastR.visibility = View.VISIBLE
                 }
 
-                bLoaded = true
+//                bLoaded = true
             }
 
             if (recommendation.lunch != null) {
@@ -340,10 +340,10 @@ class HomeFragment : Fragment() {
                 binding.txtLunchCalR.text = "$cal kcal"
 
                 if (recommendation.lunch[8].eat) {
-                    calTaken += cal
-                    carbTaken += carb
-                    protTaken += prot
-                    fatTaken += fat
+//                    calTaken += cal
+//                    carbTaken += carb
+//                    protTaken += prot
+//                    fatTaken += fat
 
                     Glide.with(requireContext())
                         .load(recommendation.lunch[2].link)
@@ -362,7 +362,7 @@ class HomeFragment : Fragment() {
                     binding.cardLunchR.visibility = View.VISIBLE
                 }
 
-                lLoaded = true
+//                lLoaded = true
             }
 
             if (recommendation.dinner != null) {
@@ -395,7 +395,7 @@ class HomeFragment : Fragment() {
                     binding.cardDinnerR.visibility = View.VISIBLE
                 }
 
-                dLoaded = true
+//                dLoaded = true
             }
         }
 

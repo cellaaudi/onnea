@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cellaaudi.onnea.api.MLConfig
 import com.cellaaudi.onnea.api.SpoonacularConfig
-import com.cellaaudi.onnea.model.DetailFoodResponse
-import com.cellaaudi.onnea.model.OnlyBooleanResponse
+import com.cellaaudi.onnea.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,8 +17,14 @@ class AddFoodDetailViewModel : ViewModel() {
     private val _detail = MutableLiveData<DetailFoodResponse>()
     val detail: LiveData<DetailFoodResponse> = _detail
 
+    private val _nutrition = MutableLiveData<NutritionSpoonacularResponse>()
+    val nutrition: LiveData<NutritionSpoonacularResponse> = _nutrition
+
     private val _msg = MutableLiveData<String>()
     val msg: LiveData<String> = _msg
+
+    private val _msgNut = MutableLiveData<String>()
+    val msgNut: LiveData<String> = _msgNut
 
     private val _add = MutableLiveData<Boolean>()
     val add: LiveData<Boolean> get() = _add
@@ -40,19 +45,41 @@ class AddFoodDetailViewModel : ViewModel() {
 
                 if (response.isSuccessful) {
                     _detail.value = response.body()
-                    Log.e("FoodDetail", "${response.body()}")
                 } else {
                     _msg.value = "There was an error retrieving food data."
-                    Log.e("FoodDetail", "onFailureResponse")
                 }
             }
 
             override fun onFailure(call: Call<DetailFoodResponse>, t: Throwable) {
                 _isLoading.value = false
                 _msg.value = "There was an error retrieving food data."
-                Log.e("FoodDetail", "onFailure")
+            }
+        })
+    }
+
+    fun getNutrition(foodId: Int) {
+        _isLoading.value = true
+        val client = SpoonacularConfig.getApiService().getNutrition(id = foodId)
+
+        client.enqueue(object : Callback<NutritionSpoonacularResponse> {
+            override fun onResponse(
+                call: Call<NutritionSpoonacularResponse>,
+                response: Response<NutritionSpoonacularResponse>
+            ) {
+                _isLoading.value = false
+
+                if (response.isSuccessful) {
+                    _nutrition.value = response.body()
+                    Log.e("Nutrition", "${response.body()} -- URL: ${call.request().url}")
+                } else {
+                    _msgNut.value = "There was an error retrieving nutrition data."
+                }
             }
 
+            override fun onFailure(call: Call<NutritionSpoonacularResponse>, t: Throwable) {
+                _isLoading.value = false
+                _msgNut.value = "There was an error retrieving nutrition data."
+            }
         })
     }
 
@@ -84,11 +111,15 @@ class AddFoodDetailViewModel : ViewModel() {
 
                 if (response.isSuccessful) {
                     _add.value = response.body()?.message
+                    Log.e("addfood", "${response.body()} -- URL: ${call.request().url}")
+                } else {
+                    Log.e("addfood", "fail ${response.body()}")
                 }
             }
 
             override fun onFailure(call: Call<OnlyBooleanResponse>, t: Throwable) {
                 _isLoading.value = false
+                Log.e("addfood", "failure ${t.message}")
             }
         })
     }

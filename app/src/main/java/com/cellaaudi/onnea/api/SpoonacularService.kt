@@ -1,7 +1,6 @@
 package com.cellaaudi.onnea.api
 
-import com.cellaaudi.onnea.model.DetailFoodResponse
-import com.cellaaudi.onnea.model.SearchFoodResponse
+import com.cellaaudi.onnea.model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -21,6 +20,12 @@ interface SpoonacularService {
         @Path("id") id: Int,
         @Query("apiKey") apiKey: String = API_KEY
     ): Call<DetailFoodResponse>
+
+    @GET("recipes/{id}/nutritionWidget.json")
+    fun getNutrition(
+        @Path("id") id: Int,
+        @Query("apiKey") apiKey: String = API_KEY
+    ): Call<NutritionSpoonacularResponse>
 
     companion object {
         private const val API_KEY = "6e93a79ca3e14908b5ec900e92f7d2c1"

@@ -1,14 +1,14 @@
 package com.cellaaudi.onnea.ui.addfood
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
-import com.cellaaudi.onnea.R
-import com.cellaaudi.onnea.databinding.ActivityAddFoodBinding
 import com.cellaaudi.onnea.databinding.ActivityAddFoodDetailBinding
-import com.cellaaudi.onnea.ui.fooddetail.FoodDetailActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class AddFoodDetailActivity : AppCompatActivity() {
@@ -37,19 +37,22 @@ class AddFoodDetailActivity : AppCompatActivity() {
         _binding = ActivityAddFoodDetailBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+        supportActionBar?.hide()
+
         auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid
 
         foodId = intent.getIntExtra(FOOD_ID, 1)
-        day = intent.getIntExtra(AddFoodActivity.DAY, 1)
-        month = intent.getIntExtra(AddFoodActivity.MONTH, 1)
-        type = intent.getStringExtra(AddFoodActivity.TYPE).toString()
+        day = intent.getIntExtra(DAY, 1)
+        month = intent.getIntExtra(MONTH, 1)
+        type = intent.getStringExtra(TYPE).toString()
 
         viewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
         viewModel.getDetail(foodId)
+        viewModel.getNutrition(foodId)
 
         viewModel.detail.observe(this) { food ->
             binding?.imgFoodDetailAdd?.let {
@@ -58,22 +61,42 @@ class AddFoodDetailActivity : AppCompatActivity() {
                     .into(it)
             }
             binding?.txtTitleAdd?.text = food.title
+            binding?.txtReadyAdd?.text = "Ready in ${food.readyInMinutes} minutes"
             link = food.image
-//            calories = food.ca
             imagetype = food.imageType
         }
 
+        viewModel.nutrition.observe(this) { nutrition ->
+            calories = nutrition.calories
+            carbohydrates = nutrition.carbs.removeSuffix("g")
+            protein = nutrition.protein.removeSuffix("g")
+            fat = nutrition.fat.removeSuffix("g")
+
+            binding?.txtCal?.text = "$calories kcal"
+            binding?.txtCarb?.text = "$carbohydrates g"
+            binding?.txtProt?.text = "$protein g"
+            binding?.txtFat?.text = "$fat g"
+        }
+
+        viewModel.msgNut.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+
         binding?.btnAddFood?.setOnClickListener {
-//            if (uid != null) {
-//                viewModel.changeFood(
-//                    uid,
-//                    foodId.toString(),
-//                    day.toString(),
-//                    month.toString(),
-//                    binding?.txtTitleAdd?.text.toString(),
-//                    /// ambil dari text
-//                )
-//            }
+            if (uid != null) {
+                viewModel.changeFood(
+                    uid,
+                    foodId.toString(),
+                    day.toString(),
+                    month.toString(),
+                    binding?.txtTitleAdd?.text.toString(),
+                    link, type, calories, imagetype, protein, carbohydrates, fat
+                )
+
+                viewModel.add.observe(this) {
+                    if (it) finish() else Toast.makeText(this, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
