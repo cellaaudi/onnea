@@ -15,8 +15,12 @@ import random
 import pickle
 import json
 
+cred = credentials.Certificate('onnea-apps-c8771929abfc.json')  
+firebase_admin.initialize_app(cred)
 
-def dayFood(id, day, db):
+db = firestore.client()
+
+def dayFood(id, day):
     
     doc_ref = db.collection('users').document(str(id))
     doc = doc_ref.get()
@@ -420,10 +424,7 @@ def dayFood(id, day, db):
         return {"message": "Data not found"}
     
 def setuid(id):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json')  
-    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
+    
 
     doc_ref = db.collection('users').document(str(id))
     doc_ref.set({"ID":str(id)})
@@ -431,17 +432,12 @@ def setuid(id):
     doc_ref = db.collection('users_Recommendation').document(str(id))
     doc_ref.set({"ID":str(id)})
 
-    firebase_admin.delete_app(firebase_admin.get_app())
 
     return {"message": True}
 
 def getrecommendation(id, day, month):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json') 
     if getquestion(id) == False:
         return "Data belum lengkap"
-    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
     doc_Ref = db.collection('users_Recommendation').document(str(id)).collection('day').document(str(day))
     doc = doc_Ref.get()
     if not doc.exists:
@@ -450,33 +446,26 @@ def getrecommendation(id, day, month):
     data = doc.to_dict()
     months = data.get('Month')
     if months is None or months != str(month):
-        data_food = dayFood(id, day, db)
+        data_food = dayFood(id, day)
         doc_Ref.update({"Month":str(month)})
         doc_Ref.update(data_food)
 
     data_day = doc_Ref.get().to_dict()
 
-    firebase_admin.delete_app(firebase_admin.get_app())
     return data_day
 
 def getquestion(id):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json') 
-    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
 
     doc_ref = db.collection('users').document(str(id))
     if doc_ref.get().exists:
 
         doc = doc_ref.get().to_dict().get('Name')
-        firebase_admin.delete_app(firebase_admin.get_app())
         if(doc == None):
             return {"message": False}
         else:
             return {"message": True}
     else:
 
-        firebase_admin.delete_app(firebase_admin.get_app())
         return {"message": False}
 
     
@@ -516,7 +505,6 @@ def postquestion(id, activity, age, fruit, healthy, height, weight, name, gender
     fat_intake = fat_percentage * calorie_intake / 9
     carb_intake = carb_percentage * calorie_intake / 4
 
-    db = firestore.client()
 
     doc_ref = db.collection('users').document(str(id))
     doc_ref.update({"Activity_Level":str(activity),
@@ -541,14 +529,9 @@ def postquestion(id, activity, age, fruit, healthy, height, weight, name, gender
                    "Spiciness":str(0)})
     
 
-    firebase_admin.delete_app(firebase_admin.get_app())
     return {"message": True}
 
 def getnutrition(id):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json') 
-    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
 
     doc_ref = db.collection('users').document(str(id))
     calories = doc_ref.get().to_dict().get('Calories')
@@ -556,17 +539,12 @@ def getnutrition(id):
     fat = doc_ref.get().to_dict().get('Fat')
     carbohydrates = doc_ref.get().to_dict().get('Carbohydrates')
 
-    firebase_admin.delete_app(firebase_admin.get_app())
 
     output = {"Calories": calories, "Protein": protein, "Fat": fat, "Carbohydrates": carbohydrates}
 
     return output
 
 def updatefood(uid, id, day, month, name, link, type, calories, imagetype, protein, fat, carbohydrates):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json')  
-    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
     
 
     doc_ref = db.collection('users_Recommendation').document(str(uid)).collection('day').document(str(day))
@@ -580,18 +558,12 @@ def updatefood(uid, id, day, month, name, link, type, calories, imagetype, prote
     
     rating(uid, id)
     recalculate(uid)
-    firebase_admin.delete_app(firebase_admin.get_app())
     return {"message": True}
 
 def getdata(id):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json')
-    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
 
     doc_ref = db.collection('users').document(str(id))
     doc = doc_ref.get()
-    firebase_admin.delete_app(firebase_admin.get_app())
     if doc.exists:
 
         return doc.to_dict()
@@ -599,10 +571,6 @@ def getdata(id):
         return {"message": False}
     
 def updateeat(id, day, month, type):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json')  
-    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
 
     doc_ref = db.collection('users_Recommendation').document(str(id)).collection('day').document(str(day))
     doc_ref.update({"Month":str(month)})
@@ -641,25 +609,16 @@ def updateeat(id, day, month, type):
             doc_ref.set(doc)
     
 
-    firebase_admin.delete_app(firebase_admin.get_app())
     return {"message": True}
 
 def getcatering(id):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json')
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()
 
     doc_ref = db.collection('catering').document('Surabaya').collection(str(id)).document('data')
     data = doc_ref.get().to_dict()
     json_data = json.dumps(data)
-    firebase_admin.delete_app(firebase_admin.get_app())
     return json_data
 
 def nutritioncalc(id, day):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json')
-    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
 
     calories = 0
     protein = 0
@@ -699,14 +658,9 @@ def nutritioncalc(id, day):
                     carbs += float(breakfast[7]['Carbohydrates'])
             
     output = {"Calories" : calories, "Protein": protein, "Fat": fat, "Carbohydrates": carbs}
-    firebase_admin.delete_app(firebase_admin.get_app())
     return output
 
 def recalculate(id):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json')
-    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
     bitterness = 0
     fattiness = 0
     saltiness = 0
@@ -739,20 +693,14 @@ def recalculate(id):
     doc_ref.update({'Bitterness': bitterness, 'Fattiness': fattiness, 'Saltiness': saltiness, 'Savoriness': savoriness, 'Sourness': sourness, 'Sweetness': sweetness})
 
 
-    firebase_admin.delete_app(firebase_admin.get_app())
 
 
 def rating(uid, id):
-    cred = credentials.Certificate('onnea-apps-c8771929abfc.json')
-    firebase_admin.initialize_app(cred)
-
-    db = firestore.client()
 
     doc_ref = db.collection('users').document(str(uid)).collection('ratings').document('rate')
 
     doc_ref.update({str(id): '5'})
 
-    firebase_admin.delete_app(firebase_admin.get_app())
 
 
 def predict(x):
