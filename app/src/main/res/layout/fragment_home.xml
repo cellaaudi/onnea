@@ -63,7 +63,7 @@
                 app:layout_constraintTop_toTopOf="@+id/btnPrev" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardWater"
+                android:id="@+id/cardProgress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -77,63 +77,183 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageButton
-                        android:id="@+id/btnAddWater"
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:contentDescription="@string/desc_add"
-                        android:src="@drawable/ic_round_add_24"
-                        app:layout_constraintBottom_toBottomOf="@+id/txtTotalWater"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/txtTotalWater"
-                        app:tint="@color/green"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.33" />
 
-                    <ImageButton
-                        android:id="@+id/btnSubWater"
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:background="@null"
-                        android:contentDescription="@string/desc_remove"
-                        android:src="@drawable/ic_round_remove_24"
-                        app:layout_constraintBottom_toBottomOf="@+id/txtTotalWater"
-                        app:layout_constraintEnd_toStartOf="@+id/txtTotalWater"
-                        app:layout_constraintTop_toTopOf="@+id/txtTotalWater"
-                        app:tint="@color/green"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:orientation="vertical"
+                        card_view:layout_constraintGuide_percent="0.67" />
 
                     <TextView
-                        android:id="@+id/textWater"
-                        style="@style/TitleText"
+                        android:id="@+id/txtTakenCal"
+                        style="@style/NumText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/water"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+                    <ProgressBar
+                        android:id="@+id/pbCal"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/txtTakenCal"
+                        app:layout_constraintTop_toBottomOf="@+id/txtTakenCal" />
+
+                    <TextView
+                        android:id="@+id/txtNeededCal"
+                        style="@style/RegularText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kcal"
+                        app:layout_constraintBottom_toBottomOf="@+id/txtTakenCal"
+                        app:layout_constraintStart_toEndOf="@+id/txtTakenCal" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        style="@style/DescText.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/calories"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/txtTotalWater"
-                        style="@style/TitleText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="@string/number"
-                        android:textAlignment="center"
-                        app:layout_constraintBottom_toBottomOf="@+id/txtSubWater"
-                        app:layout_constraintEnd_toStartOf="@+id/btnAddWater"
-                        app:layout_constraintTop_toTopOf="@+id/textWater" />
-
-                    <TextView
-                        android:id="@+id/txtSubWater"
+                        android:id="@+id/textView27"
+                        style="@style/DescText.Bold"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="@string/ml"
-                        app:layout_constraintEnd_toStartOf="@+id/btnSubWater"
-                        app:layout_constraintStart_toStartOf="@+id/textWater"
-                        app:layout_constraintTop_toBottomOf="@+id/textWater" />
+                        android:layout_marginTop="16dp"
+                        android:text="@string/carbs"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/pbCal" />
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        style="@style/DescText.Bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/protein"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                        app:layout_constraintStart_toStartOf="@+id/guideline7"
+                        app:layout_constraintTop_toTopOf="@+id/textView27" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        style="@style/DescText.Bold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fat"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline8"
+                        app:layout_constraintTop_toTopOf="@+id/textView28" />
+
+                    <TextView
+                        android:id="@+id/txtTakenCarb"
+                        style="@style/RegularText.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+                    <TextView
+                        android:id="@+id/txtNeededCarb"
+                        style="@style/DescText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/g"
+                        app:layout_constraintBottom_toBottomOf="@+id/txtTakenCarb"
+                        app:layout_constraintStart_toEndOf="@+id/txtTakenCarb" />
+
+                    <ProgressBar
+                        android:id="@+id/pbCarb"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtTakenCarb" />
+
+                    <TextView
+                        android:id="@+id/txtTakenProt"
+                        style="@style/RegularText.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number"
+                        app:layout_constraintStart_toStartOf="@+id/guideline7"
+                        app:layout_constraintTop_toTopOf="@+id/txtTakenCarb" />
+
+                    <TextView
+                        android:id="@+id/txtNeededProt"
+                        style="@style/DescText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/g"
+                        app:layout_constraintBottom_toBottomOf="@+id/txtTakenProt"
+                        app:layout_constraintStart_toEndOf="@+id/txtTakenProt" />
+
+                    <TextView
+                        android:id="@+id/txtTakenFat"
+                        style="@style/RegularText.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number"
+                        app:layout_constraintStart_toStartOf="@+id/guideline8"
+                        app:layout_constraintTop_toTopOf="@+id/txtTakenProt" />
+
+                    <TextView
+                        android:id="@+id/txtNeededFat"
+                        style="@style/DescText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/g"
+                        app:layout_constraintBottom_toBottomOf="@+id/txtTakenFat"
+                        app:layout_constraintStart_toEndOf="@+id/txtTakenFat" />
+
+                    <ProgressBar
+                        android:id="@+id/pbProt"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                        app:layout_constraintStart_toStartOf="@+id/guideline7"
+                        app:layout_constraintTop_toTopOf="@+id/pbCarb" />
+
+                    <ProgressBar
+                        android:id="@+id/pbFat"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline8"
+                        app:layout_constraintTop_toTopOf="@+id/pbProt" />
+
+                    <ProgressBar
+                        android:id="@+id/pbNutrition"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/pbProt"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -144,9 +264,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:contentPadding="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/cardWater"
-                app:layout_constraintStart_toStartOf="@+id/cardWater"
-                app:layout_constraintTop_toBottomOf="@+id/cardWater"
+                app:layout_constraintEnd_toEndOf="@+id/cardProgress"
+                app:layout_constraintStart_toStartOf="@+id/cardProgress"
+                app:layout_constraintTop_toBottomOf="@+id/cardProgress"
                 card_view:cardCornerRadius="8dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -229,6 +349,16 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.cardview.widget.CardView>
+
+                    <ProgressBar
+                        android:id="@+id/pbB"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -323,6 +453,16 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
+                    <ProgressBar
+                        android:id="@+id/pbL"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -364,7 +504,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/txtSubDinner2"
+                        android:id="@+id/txtDinnerName"
                         style="@style/TitleText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -405,14 +545,24 @@
                     </androidx.cardview.widget.CardView>
 
                     <TextView
-                        android:id="@+id/textView25"
+                        android:id="@+id/txtDinnerCal"
                         style="@style/RegularText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/kcal"
-                        app:layout_constraintEnd_toEndOf="@+id/txtSubDinner2"
-                        app:layout_constraintStart_toStartOf="@+id/txtSubDinner2"
-                        app:layout_constraintTop_toBottomOf="@+id/txtSubDinner2" />
+                        app:layout_constraintEnd_toEndOf="@+id/txtDinnerName"
+                        app:layout_constraintStart_toStartOf="@+id/txtDinnerName"
+                        app:layout_constraintTop_toBottomOf="@+id/txtDinnerName" />
+
+                    <ProgressBar
+                        android:id="@+id/pbD"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -436,8 +586,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:contentPadding="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/cardWater"
-                app:layout_constraintStart_toStartOf="@+id/cardWater"
+                app:layout_constraintEnd_toEndOf="@+id/cardProgress"
+                app:layout_constraintStart_toStartOf="@+id/cardProgress"
                 app:layout_constraintTop_toBottomOf="@+id/textView24"
                 card_view:cardCornerRadius="8dp">
 
@@ -518,6 +668,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:src="@tools:sample/avatars" />
+
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.cardview.widget.CardView>
@@ -660,8 +811,8 @@
                         android:layout_height="48dp"
                         android:background="@drawable/btn_primary"
                         android:contentDescription="@string/desc_add"
-                        android:src="@drawable/ic_round_add_24"
                         android:enabled="false"
+                        android:src="@drawable/ic_round_add_24"
                         app:layout_constraintBottom_toBottomOf="@+id/cardView5R"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/cardView5R"

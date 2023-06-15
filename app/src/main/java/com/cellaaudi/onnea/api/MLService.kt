@@ -1,9 +1,6 @@
 package com.cellaaudi.onnea.api
 
-import com.cellaaudi.onnea.model.FoodRecognitionResponse
-import com.cellaaudi.onnea.model.OnlyBooleanResponse
-import com.cellaaudi.onnea.model.RecommendationResponse
-import com.cellaaudi.onnea.model.UserResponse
+import com.cellaaudi.onnea.model.*
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -48,6 +45,11 @@ interface MLService {
         @Query("month") month: String,
         @Query("type") type: String
     ): Call<OnlyBooleanResponse>
+
+    @GET("gettingnutrition")
+    fun getNutrition(
+        @Query("id") id: String
+    ): Call<NutritionResponse>
 
     @GET("getuserdata")
     fun getUser(

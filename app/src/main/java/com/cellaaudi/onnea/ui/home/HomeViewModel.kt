@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cellaaudi.onnea.api.MLConfig
+import com.cellaaudi.onnea.model.NutritionResponse
 import com.cellaaudi.onnea.model.OnlyBooleanResponse
 import com.cellaaudi.onnea.model.RecommendationResponse
 import com.cellaaudi.onnea.ui.profile.ProfileViewModel
@@ -18,17 +19,54 @@ class HomeViewModel : ViewModel() {
     private val _date = MutableLiveData<Date>()
     val date: LiveData<Date> = _date
 
+    private val _nutrition = MutableLiveData<NutritionResponse>()
+    val nutrition: LiveData<NutritionResponse> get() = _nutrition
+
+    private val _nutrMsg = MutableLiveData<String>()
+    val nutrMsg: LiveData<String> get() = _nutrMsg
+
     private val _food = MutableLiveData<RecommendationResponse>()
-    val food: LiveData<RecommendationResponse> = _food
+    val food: LiveData<RecommendationResponse> get() = _food
 
     private val _recMsg = MutableLiveData<String>()
-    val recMsg: LiveData<String> = _recMsg
+    val recMsg: LiveData<String> get() = _recMsg
+
+    private val _updateEaten = MutableLiveData<Boolean>()
+    val updateEaten: LiveData<Boolean> get() = _updateEaten
+
+    private val _updateMsg = MutableLiveData<String>()
+    val updateMsg: LiveData<String> get() = _updateMsg
 
     private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
+    val isLoading: LiveData<Boolean> get() = _isLoading
 
     fun setDate(selDate: Date) {
         _date.value = selDate
+    }
+
+    fun getNutrition(id: String) {
+        _isLoading.value = true
+        val client = MLConfig.getApiService().getNutrition(id)
+
+        client.enqueue(object : Callback<NutritionResponse> {
+            override fun onResponse(
+                call: Call<NutritionResponse>,
+                response: Response<NutritionResponse>
+            ) {
+                _isLoading.value = false
+
+                if (response.isSuccessful) {
+                    _nutrition.value = response.body()
+                } else {
+                    _nutrMsg.value = "There was an error retrieving nutrition data."
+                }
+            }
+
+            override fun onFailure(call: Call<NutritionResponse>, t: Throwable) {
+                _isLoading.value = false
+                _nutrMsg.value = "There was an error retrieving nutrition data."
+            }
+        })
     }
 
     fun getRecommendation(id :String, day: String, month: String) {
@@ -57,6 +95,7 @@ class HomeViewModel : ViewModel() {
     }
 
     fun updateEat(id: String, day: String, month: String, type: String) {
+        _isLoading.value = true
         val client = MLConfig.getApiService().updateEaten(id, day, month, type)
 
         client.enqueue(object : Callback<OnlyBooleanResponse> {
@@ -64,15 +103,22 @@ class HomeViewModel : ViewModel() {
                 call: Call<OnlyBooleanResponse>,
                 response: Response<OnlyBooleanResponse>
             ) {
+                _isLoading.value = false
+
                 if (response.isSuccessful) {
                     if (response.body()?.message == true) {
-                        getRecommendation(id, day, month)
+                        _updateEaten.value = response.body()?.message
+                    } else {
+                        _updateMsg.value = "Something went wrong. Please try again."
                     }
+                } else {
+                    _updateMsg.value = "Something went wrong. Please try again."
                 }
             }
 
             override fun onFailure(call: Call<OnlyBooleanResponse>, t: Throwable) {
-                Log.e(TAG, "onFailure: ${t.message}")
+                _isLoading.value = false
+                _updateMsg.value = "Something went wrong. Please try again."
             }
         })
     }
