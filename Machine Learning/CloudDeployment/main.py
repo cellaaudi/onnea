@@ -576,6 +576,7 @@ def updateeat(id, day, month, type):
     if type == 'Breakfast':
         doc = doc_ref.get().to_dict()
         if doc and "Breakfast" in doc:
+            
             rating(id, doc['Breakfast'][0]['ID'])
             recalculate(id)
             for item in doc["Breakfast"]:
@@ -643,17 +644,17 @@ def nutritioncalc(id, day):
         for item in lunch:
             if 'Eat' in item:
                 if item['Eat']:
-                    calories += float(breakfast[4]['Calories'])
-                    protein += float(breakfast[5]['Protein'])
-                    fat += float(breakfast[6]['Fat'])
-                    carbs += float(breakfast[7]['Carbohydrates'])
+                    calories += float(lunch[4]['Calories'])
+                    protein += float(lunch[5]['Protein'])
+                    fat += float(lunch[6]['Fat'])
+                    carbs += float(lunch[7]['Carbohydrates'])
         for item in dinner:
             if 'Eat' in item:
                 if item['Eat']:
-                    calories += float(breakfast[4]['Calories'])
-                    protein += float(breakfast[5]['Protein'])
-                    fat += float(breakfast[6]['Fat'])
-                    carbs += float(breakfast[7]['Carbohydrates'])
+                    calories += float(dinner[4]['Calories'])
+                    protein += float(dinner[5]['Protein'])
+                    fat += float(dinner[6]['Fat'])
+                    carbs += float(dinner[7]['Carbohydrates'])
             
     output = {"Calories" : calories, "Protein": protein, "Fat": fat, "Carbohydrates": carbs}
     return output
@@ -681,6 +682,9 @@ def recalculate(id):
             sourness += float(data['Sourness']) * int(value)
             sweetness += float(data['Sweetness']) * int(value)
             i += 100
+
+    if(i == 0):
+        return False
     bitterness /= i
     fattiness /= i
     saltiness /= i
