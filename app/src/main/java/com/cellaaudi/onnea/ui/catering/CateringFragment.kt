@@ -1,5 +1,6 @@
 package com.cellaaudi.onnea.ui.catering
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,8 @@ import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentCateringBinding
 import com.cellaaudi.onnea.databinding.FragmentHomeBinding
 import com.cellaaudi.onnea.model.CateringResponse
+import com.cellaaudi.onnea.ui.cateringdetail.CateringDetailActivity
+import com.cellaaudi.onnea.ui.cateringdetail.CateringDetailViewModel
 import com.cellaaudi.onnea.ui.home.HomeViewModel
 
 class CateringFragment : Fragment() {
@@ -18,7 +21,7 @@ class CateringFragment : Fragment() {
     private var _binding: FragmentCateringBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: CateringViewModel by viewModels()
+    private val viewModel: CateringDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,5 +45,11 @@ class CateringFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding?.cardCat1?.setOnClickListener {
+            val intent = Intent(requireContext(), CateringDetailActivity::class.java)
+            intent.putExtra(CateringDetailActivity.CAT_ID, 1)
+            startActivity(intent)
+        }
     }
 }

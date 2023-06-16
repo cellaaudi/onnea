@@ -125,6 +125,11 @@
     <string name="catering_loc">Catering\'s Location</string>
     <string name="catering_rate">Catering\'s Rate</string>
     <string name="catering_rate_icon">Catering\'s Rate Icon</string>
+    <string name="wazap">Chat in WhatsApp</string>
+    <string name="price">Price starts from</string>
+    <string name="rp">Rp 0.00,-</string>
+    <string name="menu">Menu</string>
+    <string name="tnc">Terms and Conditions</string>
 
     <!--    Add-->
     <string name="a_food_name">Food\'s name</string>

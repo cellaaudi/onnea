@@ -31,7 +31,7 @@
         android:theme="@style/Theme.Onnea"
         tools:targetApi="31">
         <activity
-            android:name=".CateringDetailActivity"
+            android:name=".ui.cateringdetail.CateringDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.addfood.AddFoodDetailActivity"
