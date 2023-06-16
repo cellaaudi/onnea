@@ -415,6 +415,8 @@ class HomeFragment : Fragment() {
                 Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
             }
 
+            calculateNutrition(id, date)
+
             return true
         }
 
