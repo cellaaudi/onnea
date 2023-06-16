@@ -61,7 +61,7 @@ The mobile app was developed using Kotlin, designed to be user-friendly and intu
 - [Survey Data](https://docs.google.com/spreadsheets/d/1DBrU1LYphs5Wo9h6ZuIWIb8FXfthpo3t/edit?usp=sharing&ouid=109004949708396039468&rtpof=true&sd=true)
 
 ## APK Link
-- [APK Link](https://drive.google.com/file/d/1YRC3GJG2IJ7AoYc2XSXQTedkJz24JyFr/view?usp=sharing)
+- [APK Link](https://drive.google.com/file/d/1erkfTzcuRZyQlbtvAmYtVbL4tYgRrs2L/view?usp=drive_link)
 
 ## Machine Learning
 - TensorFlow
