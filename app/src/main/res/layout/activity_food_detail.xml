@@ -71,7 +71,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtReady"
+                android:id="@+id/txtReadyDetail"
                 style="@style/DescText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -87,8 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/nutrients"
-                app:layout_constraintStart_toStartOf="@+id/txtReady"
-                app:layout_constraintTop_toBottomOf="@+id/txtReady" />
+                app:layout_constraintStart_toStartOf="@+id/txtReadyDetail"
+                app:layout_constraintTop_toBottomOf="@+id/txtReadyDetail" />
 
             <TextView
                 android:id="@+id/textView31"
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/number"
-                app:layout_constraintEnd_toEndOf="@+id/txtReady"
+                app:layout_constraintEnd_toEndOf="@+id/txtReadyDetail"
                 app:layout_constraintStart_toEndOf="@+id/textView31"
                 app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -156,11 +156,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fat"
-                app:layout_constraintBottom_toBottomOf="@+id/txtFat"
+                app:layout_constraintBottom_toBottomOf="@+id/txtFatDetail"
                 app:layout_constraintStart_toStartOf="@+id/textView37" />
 
             <TextView
-                android:id="@+id/txtFat"
+                android:id="@+id/txtFatDetail"
                 style="@style/RegularText.Bold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

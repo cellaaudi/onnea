@@ -20,6 +20,9 @@ class AddFoodDetailViewModel : ViewModel() {
     private val _nutrition = MutableLiveData<NutritionSpoonacularResponse>()
     val nutrition: LiveData<NutritionSpoonacularResponse> = _nutrition
 
+//    private val _ingredients = MutableLiveData<IngredientsResponse>()
+//    val ingredients: LiveData<IngredientsResponse> = _ingredients
+
     private val _msg = MutableLiveData<String>()
     val msg: LiveData<String> = _msg
 
@@ -82,6 +85,28 @@ class AddFoodDetailViewModel : ViewModel() {
             }
         })
     }
+
+//    fun getIngredients(id: Int) {
+//        _isLoading.value = true
+//        val client = SpoonacularConfig.getApiService().getIngredients(id)
+//
+//        client.enqueue(object : Callback<IngredientsResponse> {
+//            override fun onResponse(
+//                call: Call<IngredientsResponse>,
+//                response: Response<IngredientsResponse>
+//            ) {
+//                _isLoading.value = false
+//
+//                if (response.isSuccessful) {
+//                    _ingredients.value = response.body()
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<IngredientsResponse>, t: Throwable) {
+//                _isLoading.value = false
+//            }
+//        })
+//    }
 
     fun changeFood(
         uid: String,

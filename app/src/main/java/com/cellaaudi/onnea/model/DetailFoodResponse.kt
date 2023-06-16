@@ -55,9 +55,6 @@ data class DetailFoodResponse(
 	@field:SerializedName("imageType")
 	val imageType: String,
 
-	@field:SerializedName("winePairing")
-	val winePairing: WinePairing,
-
 	@field:SerializedName("summary")
 	val summary: String,
 
@@ -75,9 +72,6 @@ data class DetailFoodResponse(
 
 	@field:SerializedName("dishTypes")
 	val dishTypes: List<String>,
-
-	@field:SerializedName("extendedIngredients")
-	val extendedIngredients: List<ExtendedIngredientsItem>,
 
 	@field:SerializedName("gaps")
 	val gaps: String,
@@ -111,115 +105,4 @@ data class DetailFoodResponse(
 
 	@field:SerializedName("ketogenic")
 	val ketogenic: Boolean
-)
-
-data class ExtendedIngredientsItem(
-
-	@field:SerializedName("originalName")
-	val originalName: String,
-
-	@field:SerializedName("image")
-	val image: String,
-
-	@field:SerializedName("amount")
-	val amount: Any,
-
-	@field:SerializedName("measures")
-	val measures: Measures,
-
-	@field:SerializedName("unit")
-	val unit: String,
-
-	@field:SerializedName("original")
-	val original: String,
-
-	@field:SerializedName("consitency")
-	val consitency: String,
-
-	@field:SerializedName("meta")
-	val meta: List<Any>,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("aisle")
-	val aisle: String
-)
-
-data class Measures(
-
-	@field:SerializedName("metric")
-	val metric: Metric,
-
-	@field:SerializedName("us")
-	val us: Us
-)
-
-data class Metric(
-
-	@field:SerializedName("amount")
-	val amount: Any,
-
-	@field:SerializedName("unitShort")
-	val unitShort: String,
-
-	@field:SerializedName("unitLong")
-	val unitLong: String
-)
-
-data class WinePairing(
-
-	@field:SerializedName("productMatches")
-	val productMatches: List<ProductMatchesItem>,
-
-	@field:SerializedName("pairingText")
-	val pairingText: String,
-
-	@field:SerializedName("pairedWines")
-	val pairedWines: List<String>
-)
-
-data class Us(
-
-	@field:SerializedName("amount")
-	val amount: Any,
-
-	@field:SerializedName("unitShort")
-	val unitShort: String,
-
-	@field:SerializedName("unitLong")
-	val unitLong: String
-)
-
-data class ProductMatchesItem(
-
-	@field:SerializedName("score")
-	val score: Any,
-
-	@field:SerializedName("price")
-	val price: String,
-
-	@field:SerializedName("imageUrl")
-	val imageUrl: String,
-
-	@field:SerializedName("averageRating")
-	val averageRating: Any,
-
-	@field:SerializedName("link")
-	val link: String,
-
-	@field:SerializedName("description")
-	val description: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("title")
-	val title: String,
-
-	@field:SerializedName("ratingCount")
-	val ratingCount: Any
 )

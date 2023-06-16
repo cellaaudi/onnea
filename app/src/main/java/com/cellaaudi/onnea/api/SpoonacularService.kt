@@ -27,6 +27,12 @@ interface SpoonacularService {
         @Query("apiKey") apiKey: String = API_KEY
     ): Call<NutritionSpoonacularResponse>
 
+//    @GET("recipes/{id}/ingredientWidget.json")
+//    fun getIngredients(
+//        @Path("id") id: Int,
+//        @Query("apiKey") apiKey: String = API_KEY
+//    ): Call<IngredientsResponse>
+
     companion object {
         private const val API_KEY = "6e93a79ca3e14908b5ec900e92f7d2c1"
     }
