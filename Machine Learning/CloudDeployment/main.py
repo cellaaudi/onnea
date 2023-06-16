@@ -576,6 +576,7 @@ def updateeat(id, day, month, type):
     if type == 'Breakfast':
         doc = doc_ref.get().to_dict()
         if doc and "Breakfast" in doc:
+            
             rating(id, doc['Breakfast'][0]['ID'])
             recalculate(id)
             for item in doc["Breakfast"]:
@@ -681,6 +682,9 @@ def recalculate(id):
             sourness += float(data['Sourness']) * int(value)
             sweetness += float(data['Sweetness']) * int(value)
             i += 100
+
+    if(i == 0):
+        return False
     bitterness /= i
     fattiness /= i
     saltiness /= i
