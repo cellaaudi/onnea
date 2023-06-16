@@ -58,7 +58,10 @@ The mobile app was developed using Kotlin, designed to be user-friendly and intu
 # Resources
 ## Dataset
 - [Food-101](http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz)
-- [Survey Data]
+- [Survey Data](https://docs.google.com/spreadsheets/d/1DBrU1LYphs5Wo9h6ZuIWIb8FXfthpo3t/edit?usp=sharing&ouid=109004949708396039468&rtpof=true&sd=true)
+
+## APK Link
+- [APK Link](https://drive.google.com/file/d/1YRC3GJG2IJ7AoYc2XSXQTedkJz24JyFr/view?usp=sharing)
 
 ## Machine Learning
 - TensorFlow
