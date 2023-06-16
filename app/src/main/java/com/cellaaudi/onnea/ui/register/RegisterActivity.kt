@@ -28,6 +28,7 @@ import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.ActivityLoginBinding
 import com.cellaaudi.onnea.databinding.ActivityRegisterBinding
 import com.cellaaudi.onnea.ui.addfood.FoodImageActivity
+import com.cellaaudi.onnea.ui.login.LoginActivity
 import com.cellaaudi.onnea.ui.login.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 import okhttp3.MediaType.Companion.toMediaType
@@ -82,7 +83,12 @@ class RegisterActivity : AppCompatActivity() {
                                 viewModel.registerMsg.observe(this) {
                                     Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 
-                                    if (it.contains("login")) finish()
+                                    if (it.contains("login")) {
+                                        val intent = Intent(this, LoginActivity::class.java)
+                                        intent.putExtra(LoginActivity.FROM_REG, true)
+                                        startActivity(intent)
+                                        finish()
+                                    }
                                 }
                             } else {
                                 Toast.makeText(this, "Register failed. Please try again.", Toast.LENGTH_SHORT).show()

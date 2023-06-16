@@ -136,6 +136,8 @@ class HomeViewModel : ViewModel() {
             ) {
                 _isLoading.value = false
 
+                Log.e(TAG, "URL: ${call.request().url}")
+
                 if (response.isSuccessful) {
                     if (response.body()?.message == true) {
                         _updateEaten.value = response.body()?.message

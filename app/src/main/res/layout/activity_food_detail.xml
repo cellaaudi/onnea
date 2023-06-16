@@ -69,6 +69,106 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtReady"
+                style="@style/DescText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/ready_in"
+                app:layout_constraintEnd_toEndOf="@+id/txtTitle"
+                app:layout_constraintStart_toStartOf="@+id/txtTitle"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+            <TextView
+                android:id="@+id/textView30"
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/nutrients"
+                app:layout_constraintStart_toStartOf="@+id/txtReady"
+                app:layout_constraintTop_toBottomOf="@+id/txtReady" />
+
+            <TextView
+                android:id="@+id/textView31"
+                style="@style/RegularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calories"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCalDetail"
+                app:layout_constraintStart_toStartOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/txtCalDetail"
+                style="@style/RegularText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/number"
+                app:layout_constraintEnd_toEndOf="@+id/txtReady"
+                app:layout_constraintStart_toEndOf="@+id/textView31"
+                app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/textView35"
+                style="@style/RegularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/carbo"
+                app:layout_constraintBottom_toBottomOf="@+id/ttxtCarbDetail"
+                app:layout_constraintStart_toStartOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/ttxtCarbDetail"
+                style="@style/RegularText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/number"
+                app:layout_constraintEnd_toEndOf="@+id/txtCalDetail"
+                app:layout_constraintStart_toEndOf="@+id/textView35"
+                app:layout_constraintTop_toBottomOf="@+id/txtCalDetail" />
+
+            <TextView
+                android:id="@+id/textView37"
+                style="@style/RegularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/protein"
+                app:layout_constraintBottom_toBottomOf="@+id/ttxtProtDetail"
+                app:layout_constraintStart_toStartOf="@+id/textView35" />
+
+            <TextView
+                android:id="@+id/ttxtProtDetail"
+                style="@style/RegularText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/number"
+                app:layout_constraintEnd_toEndOf="@+id/ttxtCarbDetail"
+                app:layout_constraintStart_toEndOf="@+id/textView37"
+                app:layout_constraintTop_toBottomOf="@+id/ttxtCarbDetail" />
+
+            <TextView
+                android:id="@+id/textView39"
+                style="@style/RegularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fat"
+                app:layout_constraintBottom_toBottomOf="@+id/txtFat"
+                app:layout_constraintStart_toStartOf="@+id/textView37" />
+
+            <TextView
+                android:id="@+id/txtFat"
+                style="@style/RegularText.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/number"
+                app:layout_constraintEnd_toEndOf="@+id/ttxtProtDetail"
+                app:layout_constraintStart_toEndOf="@+id/textView39"
+                app:layout_constraintTop_toBottomOf="@+id/ttxtProtDetail" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

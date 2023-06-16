@@ -1,26 +1,17 @@
 package com.cellaaudi.onnea.ui.addfood
 
-import android.content.Context
-import android.graphics.Bitmap
+import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
-import com.cellaaudi.onnea.R
+import androidx.appcompat.app.AppCompatActivity
 import com.cellaaudi.onnea.databinding.ActivityFoodImageBinding
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 
 class FoodImageActivity : AppCompatActivity() {
 
@@ -29,6 +20,9 @@ class FoodImageActivity : AppCompatActivity() {
 
     private val viewModel: FoodImageViewModel by viewModels()
 
+    private var day: Int = 0
+    private var month: Int = 0
+    private var type: String = ""
     private var file: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +32,14 @@ class FoodImageActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         binding?.txtFoodName?.visibility = View.GONE
+
+        viewModel.load.observe(this) {
+            showLoading(it)
+        }
+
+        day = intent.getIntExtra(DAY, 1)
+        month = intent.getIntExtra(MONTH, 1)
+        type = intent.getStringExtra(TYPE).toString()
 
         val imageUri = Uri.parse(intent.getStringExtra("imageUri"))
         if (imageUri != null) {
@@ -55,6 +57,14 @@ class FoodImageActivity : AppCompatActivity() {
                     binding?.txtFoodName?.visibility = View.VISIBLE
                     binding?.txtFoodName?.text = name.toString()
                 }
+            }
+        }
+
+        binding?.btnAddFoodImg?.setOnClickListener {
+            if (viewModel.load.value == false) {
+                val intent = Intent(this, AddFoodActivity::class.java)
+                intent.putExtra(AddFoodActivity.FOOD_PRED, binding?.txtFoodName?.text)
+                startActivity(intent)
             }
         }
     }
@@ -75,5 +85,15 @@ class FoodImageActivity : AppCompatActivity() {
             filePath = uri.path
         }
         return filePath
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding?.pbImg?.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        var DAY = "day"
+        var MONTH = "month"
+        var TYPE = "type"
     }
 }

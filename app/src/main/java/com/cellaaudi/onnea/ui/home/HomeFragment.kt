@@ -18,6 +18,9 @@ import com.cellaaudi.onnea.R
 import com.cellaaudi.onnea.databinding.FragmentHomeBinding
 import com.cellaaudi.onnea.ui.addfood.AddFoodActivity
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.round
@@ -70,7 +73,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getRecommendation(auth.currentUser?.uid, binding.txtDay.text.toString())
+        CoroutineScope(Dispatchers.Main).launch {
+            getRecommendation(auth.currentUser?.uid, binding.txtDay.text.toString())
+        }
+
 
         binding.btnPrev.setOnClickListener {
             val button = "prev"
@@ -128,8 +134,16 @@ class HomeFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                getRecommendation(auth.currentUser?.uid, s.toString())
-                calculateNutrition(auth.currentUser?.uid, s.toString())
+//                getRecommendation(auth.currentUser?.uid, s.toString())
+//                calculateNutrition(auth.currentUser?.uid, s.toString())
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    val isFinish = getRecommendation(auth.currentUser?.uid, s.toString())
+
+                    if (isFinish) {
+                        calculateNutrition(auth.currentUser?.uid, s.toString())
+                    }
+                }
             }
         })
 
@@ -276,7 +290,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getRecommendation(id: String?, date: String) {
+    private suspend fun getRecommendation(id: String?, date: String): Boolean {
         if (id != null) {
             val (day, month) = getDateMonthNum(date)
 
@@ -298,29 +312,24 @@ class HomeFragment : Fragment() {
                     binding.txtBreakCalR.text = "$cal kcal"
 
                     if (recommendation.breakfast[8].eat) {
-//                    calTaken += cal
-//                    carbTaken += carb
-//                    protTaken += prot
-//                    fatTaken += fat
-
                         Glide.with(requireContext())
                             .load(recommendation.breakfast[2].link)
                             .into(binding.imgBreak)
                         binding.txtBreakName.text = recommendation.breakfast[1].name
                         binding.txtBreakCal.text = "$cal kcal"
-                        binding.btnAddBreakfast.setImageResource(R.drawable.ic_round_edit_24)
+//                        binding.btnAddBreakfast.setImageResource(R.drawable.ic_round_edit_24)
+                        binding.btnAddBreakfast.visibility = View.GONE
 
                         binding.cardBreakfastR.visibility = View.GONE
                     } else {
                         Glide.with(requireContext()).clear(binding.imgBreak)
                         binding.txtBreakName.text = getString(R.string.food_name)
                         binding.txtBreakCal.text = getString(R.string.kcal)
-                        binding.btnAddBreakfast.setImageResource(R.drawable.ic_round_add_24)
+//                        binding.btnAddBreakfast.setImageResource(R.drawable.ic_round_add_24)
+                        binding.btnAddBreakfast.visibility = View.VISIBLE
 
                         binding.cardBreakfastR.visibility = View.VISIBLE
                     }
-
-//                bLoaded = true
                 }
 
                 if (recommendation.lunch != null) {
@@ -336,29 +345,24 @@ class HomeFragment : Fragment() {
                     binding.txtLunchCalR.text = "$cal kcal"
 
                     if (recommendation.lunch[8].eat) {
-//                    calTaken += cal
-//                    carbTaken += carb
-//                    protTaken += prot
-//                    fatTaken += fat
-
                         Glide.with(requireContext())
                             .load(recommendation.lunch[2].link)
                             .into(binding.imgLunch)
                         binding.txtLunchName.text = recommendation.lunch[1].name
                         binding.txtLunchCal.text = "$cal kcal"
-                        binding.btnAddLunch.setImageResource(R.drawable.ic_round_edit_24)
+//                        binding.btnAddLunch.setImageResource(R.drawable.ic_round_edit_24)
+                        binding.btnAddLunch.visibility = View.GONE
 
                         binding.cardLunchR.visibility = View.GONE
                     } else {
                         Glide.with(requireContext()).clear(binding.imgLunch)
                         binding.txtLunchName.text = getString(R.string.food_name)
                         binding.txtLunchCal.text = getString(R.string.kcal)
-                        binding.btnAddLunch.setImageResource(R.drawable.ic_round_add_24)
+//                        binding.btnAddLunch.setImageResource(R.drawable.ic_round_add_24)
+                        binding.btnAddLunch.visibility = View.VISIBLE
 
                         binding.cardLunchR.visibility = View.VISIBLE
                     }
-
-//                lLoaded = true
                 }
 
                 if (recommendation.dinner != null) {
@@ -379,29 +383,33 @@ class HomeFragment : Fragment() {
                             .into(binding.imgDinner)
                         binding.txtDinnerName.text = recommendation.dinner[1].name
                         binding.txtDinnerCal.text = "$cal kcal"
-                        binding.btnAddDinner.setImageResource(R.drawable.ic_round_edit_24)
+//                        binding.btnAddDinner.setImageResource(R.drawable.ic_round_edit_24)
+                        binding.btnAddDinner.visibility = View.GONE
 
                         binding.cardDinnerR.visibility = View.GONE
                     } else {
                         Glide.with(requireContext()).clear(binding.imgDinner)
                         binding.txtDinnerName.text = getString(R.string.food_name)
                         binding.txtDinnerCal.text = getString(R.string.kcal)
-                        binding.btnAddDinner.setImageResource(R.drawable.ic_round_add_24)
+//                        binding.btnAddDinner.setImageResource(R.drawable.ic_round_add_24)
+                        binding.btnAddDinner.visibility = View.VISIBLE
 
                         binding.cardDinnerR.visibility = View.VISIBLE
                     }
-
-//                dLoaded = true
                 }
             }
 
             viewModel.recMsg.observe(requireActivity()) { msg ->
                 Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
             }
+
+            return true
         }
+
+        return false
     }
 
-    private fun updateEaten(id: String?, date: String, type: String) {
+    private suspend fun updateEaten(id: String?, date: String, type: String): Boolean {
         if (id != null) {
             val (day, month) = getDateMonthNum(date)
 
@@ -410,16 +418,29 @@ class HomeFragment : Fragment() {
             viewModel.updateEat(id, day.toString(), month.toString(), type)
 
             viewModel.updateEaten.observe(viewLifecycleOwner) {
-                getRecommendation(id, date)
+//                getRecommendation(id, date)
+                CoroutineScope(Dispatchers.Main).launch {
+                    getRecommendation(id, date)
+                }
             }
 
             viewModel.updateMsg.observe(requireActivity()) {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
+
+            return true
         }
+
+        return false
     }
 
-    private fun str2Int(str: String): Int = round(str.toDouble()).toInt()
+    private fun str2Int(str: String?): Int? {
+        return try {
+            str?.let { round(it.toDouble()).toInt() }
+        } catch (e: NumberFormatException) {
+            null
+        }
+    }
 
     private fun changeFood(date: String, typeMeal: String) {
         val (day, month) = getDateMonthNum(date)
@@ -432,7 +453,13 @@ class HomeFragment : Fragment() {
 
     private fun addRecommended(uid: String?, date: String, type: String) {
         if (uid != null) {
-            updateEaten(uid, date, type)
+            CoroutineScope(Dispatchers.Main).launch {
+                val isFinish = updateEaten(uid, date, type)
+
+                if (isFinish) {
+                    calculateNutrition(uid, date)
+                }
+            }
         }
     }
 }

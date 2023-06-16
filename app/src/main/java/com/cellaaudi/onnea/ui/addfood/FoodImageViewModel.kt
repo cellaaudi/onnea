@@ -20,7 +20,11 @@ class FoodImageViewModel : ViewModel() {
     private val _name = MutableLiveData<String>()
     val name: MutableLiveData<String> get() = _name
 
+    private val _load = MutableLiveData<Boolean>()
+    val load: MutableLiveData<Boolean> get() = _load
+
     fun foodRecognition(file: MultipartBody.Part) {
+        _load.value = true
         val client = MLConfig.getApiService().foodRecognition(file)
 
         client.enqueue(object : Callback<FoodRecognitionResponse> {
@@ -28,18 +32,22 @@ class FoodImageViewModel : ViewModel() {
                 call: Call<FoodRecognitionResponse>,
                 response: Response<FoodRecognitionResponse>
             ) {
+                _load.value = false
                 if (response.isSuccessful) {
                     response.body()?.prediction?.let { foodName(it) }
                 }
             }
 
             override fun onFailure(call: Call<FoodRecognitionResponse>, t: Throwable) {
+                _load.value = false
+                _name.value = "Something went wrong. Please try again."
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
     }
 
     private fun foodName(food_id: Int) {
+        _load.value = true
         val client = ApiConfig.getApiService().getFood(food_id)
 
         client.enqueue(object : Callback<FoodNameResponse> {
@@ -47,12 +55,18 @@ class FoodImageViewModel : ViewModel() {
                 call: Call<FoodNameResponse>,
                 response: Response<FoodNameResponse>
             ) {
+                _load.value = false
+
                 if (response.isSuccessful) {
                     _name.value = response.body()?.message
+                } else {
+                    _name.value = "Something went wrong. Please try again."
                 }
             }
 
             override fun onFailure(call: Call<FoodNameResponse>, t: Throwable) {
+                _load.value = false
+                _name.value = "Something went wrong. Please try again."
                 Log.e(TAG, "onFailure Name: ${t.message.toString()}")
             }
         })

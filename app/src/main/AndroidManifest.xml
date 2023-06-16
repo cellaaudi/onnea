@@ -31,6 +31,9 @@
         android:theme="@style/Theme.Onnea"
         tools:targetApi="31">
         <activity
+            android:name=".CateringDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.addfood.AddFoodDetailActivity"
             android:exported="false" />
         <activity
@@ -64,7 +67,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.cellaaudi.onnea.fileprovider"
+            android:authorities="com.cellaaudi.onnea"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

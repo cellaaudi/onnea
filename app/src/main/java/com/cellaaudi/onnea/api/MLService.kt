@@ -73,6 +73,11 @@ interface MLService {
         @Query("fat") fat: String
     ): Call<OnlyBooleanResponse>
 
+    @GET("catering")
+    fun getCatering(
+        @Query("id") id: Int
+    ): Call<CateringResponse>
+
     @GET("getuserdata")
     fun getUser(
         @Query("id") id: String

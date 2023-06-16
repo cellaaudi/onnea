@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginActivity : AppCompatActivity() {
@@ -29,14 +30,14 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-//    private lateinit var googleSignInClient: GoogleSignInClient
-//    private lateinit var progressDialog: ProgressDialog
-//    private var firebaseAuth = FirebaseAuth.getInstance()
-
     override fun onStart() {
         super.onStart()
-        if (auth.currentUser != null){
-            startActivity(Intent(this, MainActivity::class.java))
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            if (!intent.hasExtra(FROM_REG)) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
         }
     }
 
@@ -54,21 +55,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        progressDialog = ProgressDialog(this)
-//        progressDialog.setTitle(getString(R.string.sign_in))
-//        progressDialog.setMessage(getString(R.string.please_wait))
-//
-//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestIdToken(getString(R.string.default_web_client_id))
-//            .requestEmail()
-//            .build()
-//
-//        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
         binding?.btnLogin?.setOnClickListener {
-//            val intent = googleSignInClient.signInIntent
-//            startActivityForResult(intent, RC_SIGN_IN)
-
             viewModel.isLoading.observe(this) {
                 showLoading(it)
             }
@@ -110,45 +97,10 @@ class LoginActivity : AppCompatActivity() {
         if (isLoading) binding?.pbLogin?.visibility = View.VISIBLE else binding?.pbLogin?.visibility = View.GONE
     }
 
-//    @Deprecated("Deprecated in Java")
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (requestCode == RC_SIGN_IN){
-//            //Menangani Process Login Google
-//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-//            try{
-//                // Jika Berhasil Login
-//                val account = task.getResult(ApiException::class.java)!!
-////                viewModel.doesUserExist.observe(this) { existing ->
-//                    firebaseAuthWithGoogle(account.idToken!!)
-////                }
-////                Log.e(TAG, "Lo")
-//            }catch (e: ApiException){
-//                e.printStackTrace()
-//                Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
-
-//    private fun firebaseAuthWithGoogle(idToken: String){
-//        progressDialog.show()
-//        val credentian = GoogleAuthProvider.getCredential(idToken, null)
-//        firebaseAuth.signInWithCredential(credentian)
-//            .addOnSuccessListener {
-////                if (exist) {
-//                    startActivity(Intent(this, MainActivity::class.java))
-////                } else {
-////                    startActivity(Intent(this, QuestionsActivity::class.java))
-////                }
-//            }
-//            .addOnCompleteListener {
-//                progressDialog.dismiss()
-//            }
-//    }
-
     companion object{
         private const val TAG = "LoginActivity"
         private const val RC_SIGN_IN = 1001
+
+        var FROM_REG = "from_reg"
     }
 }

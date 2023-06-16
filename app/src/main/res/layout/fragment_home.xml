@@ -101,16 +101,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
-                    <ProgressBar
-                        android:id="@+id/pbCal"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/txtTakenCal"
-                        app:layout_constraintTop_toBottomOf="@+id/txtTakenCal" />
-
                     <TextView
                         android:id="@+id/txtNeededCal"
                         style="@style/RegularText"
@@ -138,7 +128,7 @@
                         android:text="@string/carbs"
                         app:layout_constraintEnd_toStartOf="@+id/guideline7"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/pbCal" />
+                        app:layout_constraintTop_toBottomOf="@+id/txtNeededCal" />
 
                     <TextView
                         android:id="@+id/textView28"
@@ -179,17 +169,6 @@
                         app:layout_constraintBottom_toBottomOf="@+id/txtTakenCarb"
                         app:layout_constraintStart_toEndOf="@+id/txtTakenCarb" />
 
-                    <ProgressBar
-                        android:id="@+id/pbCarb"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txtTakenCarb" />
-
                     <TextView
                         android:id="@+id/txtTakenProt"
                         style="@style/RegularText.Bold"
@@ -227,30 +206,11 @@
                         app:layout_constraintStart_toEndOf="@+id/txtTakenFat" />
 
                     <ProgressBar
-                        android:id="@+id/pbProt"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-                        app:layout_constraintStart_toStartOf="@+id/guideline7"
-                        app:layout_constraintTop_toTopOf="@+id/pbCarb" />
-
-                    <ProgressBar
-                        android:id="@+id/pbFat"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guideline8"
-                        app:layout_constraintTop_toTopOf="@+id/pbProt" />
-
-                    <ProgressBar
                         android:id="@+id/pbNutrition"
                         style="?android:attr/progressBarStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="@+id/pbProt"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

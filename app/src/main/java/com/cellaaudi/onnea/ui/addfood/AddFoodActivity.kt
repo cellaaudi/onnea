@@ -21,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cellaaudi.onnea.MainActivity
 import com.cellaaudi.onnea.adapter.AddFoodAdapter
 import com.cellaaudi.onnea.adapter.SearchFoodAdapter
 import com.cellaaudi.onnea.databinding.ActivityAddFoodBinding
@@ -44,9 +45,10 @@ class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
     private var getFile: File? = null
     private lateinit var context: Context
 
-    private var day = 0
-    private var month = 0
-    private var type = ""
+    private var day: Int = 0
+    private var month: Int = 0
+    private var type: String = ""
+    private var foodImg: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +62,11 @@ class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
         month = intent.getIntExtra(MONTH, 1)
         type = intent.getStringExtra(TYPE).toString()
 
-        Toast.makeText(this, "day $day -- month $month -- type $type", Toast.LENGTH_SHORT).show()
+        foodImg = intent.getStringExtra(FOOD_PRED).toString() ?: null
+
+        if (foodImg != "null") {
+            binding?.searchView?.setQuery(foodImg, true)
+        }
 
         showLoading(false)
 
@@ -106,6 +112,14 @@ class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
         binding?.btnGallery?.setOnClickListener {
             startGallery()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onRequestPermissionsResult(
@@ -159,6 +173,9 @@ class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
 
                 val intent = Intent(this, FoodImageActivity::class.java)
                 intent.putExtra("imageUri", uri.toString())
+                intent.putExtra(FoodImageActivity.DAY, day)
+                intent.putExtra(FoodImageActivity.MONTH, month)
+                intent.putExtra(FoodImageActivity.TYPE, type)
                 startActivity(intent)
             }
         }
@@ -201,6 +218,9 @@ class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
 
             val intent = Intent(this@AddFoodActivity, FoodImageActivity::class.java)
             intent.putExtra("imageUri", selectedImg.toString())
+            intent.putExtra(FoodImageActivity.DAY, day)
+            intent.putExtra(FoodImageActivity.MONTH, month)
+            intent.putExtra(FoodImageActivity.TYPE, type)
             startActivity(intent)
         }
     }
@@ -271,5 +291,7 @@ class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
         var DAY = "day"
         var MONTH = "month"
         var TYPE = "type"
+
+        var FOOD_PRED = "food_pred"
     }
 }
