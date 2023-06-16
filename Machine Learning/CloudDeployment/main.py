@@ -643,17 +643,17 @@ def nutritioncalc(id, day):
         for item in lunch:
             if 'Eat' in item:
                 if item['Eat']:
-                    calories += float(breakfast[4]['Calories'])
-                    protein += float(breakfast[5]['Protein'])
-                    fat += float(breakfast[6]['Fat'])
-                    carbs += float(breakfast[7]['Carbohydrates'])
+                    calories += float(lunch[4]['Calories'])
+                    protein += float(lunch[5]['Protein'])
+                    fat += float(lunch[6]['Fat'])
+                    carbs += float(lunch[7]['Carbohydrates'])
         for item in dinner:
             if 'Eat' in item:
                 if item['Eat']:
-                    calories += float(breakfast[4]['Calories'])
-                    protein += float(breakfast[5]['Protein'])
-                    fat += float(breakfast[6]['Fat'])
-                    carbs += float(breakfast[7]['Carbohydrates'])
+                    calories += float(dinner[4]['Calories'])
+                    protein += float(dinner[5]['Protein'])
+                    fat += float(dinner[6]['Fat'])
+                    carbs += float(dinner[7]['Carbohydrates'])
             
     output = {"Calories" : calories, "Protein": protein, "Fat": fat, "Carbohydrates": carbs}
     return output
