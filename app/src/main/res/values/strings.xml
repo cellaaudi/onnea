@@ -133,8 +133,7 @@
     <string name="unit">Unit</string>
     <string name="daily_needs">Daily needs:</string>
     <string name="carbo">Carbohydrates</string>
-    <string name="to_web">Read more in webpage</string>
-    <string name="add_food">Add Food</string>
+    <string name="add_food">Save new food</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

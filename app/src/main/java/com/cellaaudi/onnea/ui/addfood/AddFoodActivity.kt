@@ -60,6 +60,8 @@ class AddFoodActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks
         month = intent.getIntExtra(MONTH, 1)
         type = intent.getStringExtra(TYPE).toString()
 
+        Toast.makeText(this, "day $day -- month $month -- type $type", Toast.LENGTH_SHORT).show()
+
         showLoading(false)
 
         viewModel.load.observe(this) {

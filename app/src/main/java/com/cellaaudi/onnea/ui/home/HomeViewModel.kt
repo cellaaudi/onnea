@@ -22,6 +22,9 @@ class HomeViewModel : ViewModel() {
     private val _nutrition = MutableLiveData<NutritionResponse>()
     val nutrition: LiveData<NutritionResponse> get() = _nutrition
 
+    private val _nutritionTaken = MutableLiveData<NutritionResponse>()
+    val nutritionTaken: LiveData<NutritionResponse> get() = _nutritionTaken
+
     private val _nutrMsg = MutableLiveData<String>()
     val nutrMsg: LiveData<String> get() = _nutrMsg
 
@@ -60,6 +63,31 @@ class HomeViewModel : ViewModel() {
 
                 if (response.isSuccessful) {
                     _nutrition.value = response.body()
+                } else {
+                    _nutrMsg.value = "There was an error retrieving nutrition data."
+                }
+            }
+
+            override fun onFailure(call: Call<NutritionResponse>, t: Throwable) {
+                _isLoadingN.value = false
+                _nutrMsg.value = "There was an error retrieving nutrition data."
+            }
+        })
+    }
+
+    fun calculateNutrition(id: String, day: String) {
+        _isLoadingN.value = true
+        val client = MLConfig.getApiService().calculateNutrition(id, day)
+
+        client.enqueue(object : Callback<NutritionResponse> {
+            override fun onResponse(
+                call: Call<NutritionResponse>,
+                response: Response<NutritionResponse>
+            ) {
+                _isLoadingN.value = false
+
+                if (response.isSuccessful) {
+                    _nutritionTaken.value = response.body()
                 } else {
                     _nutrMsg.value = "There was an error retrieving nutrition data."
                 }

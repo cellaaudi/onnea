@@ -8,7 +8,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
+import com.cellaaudi.onnea.MainActivity
 import com.cellaaudi.onnea.databinding.ActivityAddFoodDetailBinding
+import com.cellaaudi.onnea.ui.home.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 
 class AddFoodDetailActivity : AppCompatActivity() {
@@ -94,7 +96,14 @@ class AddFoodDetailActivity : AppCompatActivity() {
                 )
 
                 viewModel.add.observe(this) {
-                    if (it) finish() else Toast.makeText(this, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show()
+                    if (it) {
+                        Toast.makeText(this, "Changes saved.", Toast.LENGTH_SHORT).show()
+
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

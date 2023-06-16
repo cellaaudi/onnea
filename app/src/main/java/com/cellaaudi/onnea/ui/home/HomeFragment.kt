@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -144,40 +143,33 @@ class HomeFragment : Fragment() {
         })
 
         binding.btnAddBreakfast.setOnClickListener {
-            val (day, momth) = getDateMonthNum(binding.txtDay.text.toString())
-            val type = "Breakfast"
-            val intent = Intent(requireContext(), AddFoodActivity::class.java)
-            intent.putExtra(AddFoodActivity.DAY, day.toString())
-            intent.putExtra(AddFoodActivity.MONTH, momth.toString())
-            intent.putExtra(AddFoodActivity.TYPE, type)
-            startActivity(intent)
+            changeFood(binding.txtDay.text.toString(), "Breakfast")
+        }
+
+        binding.btnAddLunch.setOnClickListener {
+            changeFood(binding.txtDay.text.toString(), "Lunch")
+        }
+
+        binding.btnAddDinner.setOnClickListener {
+            changeFood(binding.txtDay.text.toString(), "Dinner")
         }
 
         binding.btnAddBreakfastR.setOnClickListener {
-            val type = "Breakfast"
-            val uid = auth.currentUser?.uid
-
-            if (uid != null) {
-                updateEaten(uid, binding.txtDay.text.toString(), type)
-            }
+            addRecommended(auth.currentUser?.uid, binding.txtDay.text.toString(), "Breakfast")
         }
 
         binding.btnAddLunchR.setOnClickListener {
-            val type = "Lunch"
-            val uid = auth.currentUser?.uid
-
-            if (uid != null) {
-                updateEaten(uid, binding.txtDay.text.toString(), type)
-            }
+            addRecommended(auth.currentUser?.uid, binding.txtDay.text.toString(), "Lunch")
         }
 
         binding.btnAddDinnerR.setOnClickListener {
-            val type = "Dinner"
-            val uid = auth.currentUser?.uid
-
-            if (uid != null) {
-                updateEaten(uid, binding.txtDay.text.toString(), type)
-            }
+            addRecommended(auth.currentUser?.uid, binding.txtDay.text.toString(), "Dinner")
+//            val type = "Dinner"
+//            val uid = auth.currentUser?.uid
+//
+//            if (uid != null) {
+//                updateEaten(uid, binding.txtDay.text.toString(), type)
+//            }
         }
     }
 
@@ -421,4 +413,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun str2Int(str: String): Int = round(str.toDouble()).toInt()
+
+    private fun changeFood(date: String, typeMeal: String) {
+        val (day, month) = getDateMonthNum(date)
+        val intent = Intent(requireContext(), AddFoodActivity::class.java)
+        intent.putExtra(AddFoodActivity.DAY, day)
+        intent.putExtra(AddFoodActivity.MONTH, month)
+        intent.putExtra(AddFoodActivity.TYPE, typeMeal)
+        startActivity(intent)
+    }
+
+    private fun addRecommended(uid: String?, date: String, type: String) {
+        if (uid != null) {
+            updateEaten(uid, date, type)
+        }
+    }
 }

@@ -51,6 +51,12 @@ interface MLService {
         @Query("id") id: String
     ): Call<NutritionResponse>
 
+    @GET("nutritioncalculation")
+    fun calculateNutrition(
+        @Query("id") id: String,
+        @Query("day") day: String
+    ): Call<NutritionResponse>
+
     @GET("updatefoodday")
     fun updateFood(
         @Query("uid") uid: String,
