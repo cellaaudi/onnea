@@ -64,6 +64,9 @@ class FoodImageActivity : AppCompatActivity() {
             if (viewModel.load.value == false) {
                 val intent = Intent(this, AddFoodActivity::class.java)
                 intent.putExtra(AddFoodActivity.FOOD_PRED, binding?.txtFoodName?.text)
+                intent.putExtra(AddFoodActivity.DAY, day)
+                intent.putExtra(AddFoodActivity.MONTH, month)
+                intent.putExtra(AddFoodActivity.TYPE, type)
                 startActivity(intent)
             }
         }
